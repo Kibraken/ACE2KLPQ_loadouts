@@ -1,40 +1,9 @@
 import React from 'react';
 
-// let data = [
-//   ["CUP_arifle_AK101_GL","RH_qdss_nt4","rhs_acc_2dpZenit_ris","",["CUP_30Rnd_556x45_AK",30],["CUP_1Rnd_HE_GP25_M",1],""],
-//   ["rhs_weap_igla","","","",["rhs_mag_9k38_rocket",1],[],""],
-//   ["CUP_hgun_Glock17_blk","muzzle_snds_L","CUP_acc_Glock17_Flashlight","",["CUP_17Rnd_9x19_glock17",17],[],""],
-//   ["CFP_U_Crye_M90",[["FirstAidKit",1],["Chemlight_green",1,1],["CUP_17Rnd_9x19_glock17",1,17]]],
-//   ["CFP_FAPC_Operator_OGA_OD",[["MiniGrenade",2,1],["SmokeShell",1,1],["SmokeShellGreen",1,1],["Chemlight_green",1,1],["CUP_17Rnd_9x19_glock17",2,17]]],
-//   ["CFP_Kitbag_White",[["MineDetector",1],["DemoCharge_Remote_Mag",5,1],["SatchelCharge_Remote_Mag",1,1],["APERSTripMine_Wire_Mag",1,1],["APERSMine_Range_Mag",1,1],["CUP_1Rnd_HE_GP25_M",4,1]]],
-//   "CFP_OPS2017_Helmet_White","CFP_Face_Wear_Spook",["Binocular","","","",[],[],""],["ItemMap","ItemGPS","ItemRadio","ItemCompass","ItemWatch","CUP_NVG_PVS15_winter"]
-// ];
 
 let data = [["CUP_arifle_AK101_GL","RH_qdss_nt4","rhs_acc_2dpZenit_ris","",["CUP_30Rnd_556x45_AK",30],["CUP_1Rnd_HE_GP25_M",1],""],[],["CUP_hgun_Glock17_blk","muzzle_snds_L","CUP_acc_Glock17_Flashlight","",["CUP_17Rnd_9x19_glock17",17],[],""],["CFP_U_Crye_M90",[["FirstAidKit",1],["Chemlight_green",1,1],["CUP_17Rnd_9x19_glock17",1,17]]],["CFP_FAPC_Operator_OGA_OD",[["MiniGrenade",2,1],["SmokeShell",1,1],["SmokeShellGreen",1,1],["Chemlight_green",1,1],["CUP_17Rnd_9x19_glock17",2,17]]],["CFP_Kitbag_White",[["MineDetector",1],["DemoCharge_Remote_Mag",5,1],["SatchelCharge_Remote_Mag",1,1],["APERSTripMine_Wire_Mag",1,1],["APERSMine_Range_Mag",1,1],["CUP_1Rnd_HE_GP25_M",4,1]]],"CFP_OPS2017_Helmet_White","CFP_Face_Wear_Spook",["Binocular","","","",[],[],""],["ItemMap","ItemGPS","ItemRadio","ItemCompass","ItemWatch","CUP_NVG_PVS15_winter"]]
 
 //[[],[],[],[],[],[],"","",[],["","","","","",""]]
-
-
-//rifle     [["CUP_arifle_AK47_Early","","","",["CUP_30Rnd_762x39_AK47_M",30],[],""],[],[],[],[],[],"","",[],["","","","","",""]]
-//launcher  [[],["rhs_weap_igla","","","",["rhs_mag_9k38_rocket",1],[],""],[],[],[],[],"","",[],["","","","","",""]]
-//pistol    [[],[],["hgun_Pistol_heavy_01_green_F","","","",["11Rnd_45ACP_Mag",11],[],""],[],[],[],"","",[],["","","","","",""]]
-//uniform   [[],[],[],["U_C_IDAP_Man_cargo_F",[]],[],[],"","",[],["","","","","",""]]
-//vest      [[],[],[],[],["rhs_6b13_Flora",[]],[],"","",[],["","","","","",""]]
-//backpack  [[],[],[],[],[],["B_AssaultPack_rgr",[]],"","",[],["","","","","",""]]
-//helmet    [[],[],[],[],[],[],"rhs_6b26_green","",[],["","","","","",""]]
-
-//facewear  [[],[],[],[],[],[],"","T_HoodACUBLK",[],["","","","","",""]]
-
-//["CFP_U_Crye_M90","CFP_FAPC_Operator_OGA_OD","CFP_OPS2017_Helmet_White","CFP_Kitbag_White","CFP_Face_Wear_Spook"];
-//CFP_OPS2017_Helmet_White
-//
-//["CUP_arifle_AK101_GL","RH_qdss_nt4","rhs_acc_2dpZenit_ris","",["CUP_30Rnd_556x45_AK",30],["CUP_1Rnd_HE_GP25_M",1],""], <-------
-//["CUP_arifle_AK101_GL",[["CUP_30Rnd_556x45_AK",15],["CUP_1Rnd_HE_GP25_M",15]],["RH_qdss_nt4","rhs_acc_2dpZenit_ris"]];
-
-//[["rhs_weap_ak74_gp25","rhs_acc_dtk1983","","",["rhs_30Rnd_545x39_7N6M_AK",30],["CUP_1Rnd_HE_GP25_M",1],""],[],[],[],[],[],"","",[],["","","","","",""]]
-//["rhs_weap_ak74_gp25",[["rhs_30Rnd_545x39_7N6M_AK",15],["CUP_1Rnd_HE_GP25_M",15]],["rhs_acc_dtk1983"]];
-
-//["CFP_U_Crye_M90","CFP_FAPC_Operator_OGA_OD","CFP_OPS2017_Helmet_White","CFP_Kitbag_White","CFP_Face_Wear_Spook"];
 
 
 class App extends React.Component {
