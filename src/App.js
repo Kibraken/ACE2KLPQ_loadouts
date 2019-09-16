@@ -8,7 +8,7 @@ let data = [["CUP_arifle_AK101_GL","RH_qdss_nt4","rhs_acc_2dpZenit_ris","",["CUP
 
 class App extends React.Component {
   state={
-    Lodaut : {},
+    Loadout : {},
     ExportArr:data
   }
   /*
@@ -16,7 +16,7 @@ class App extends React.Component {
   validate init data array 
   
   advanced mode for several uniforms at once
-  advanced option to convert it into full lodaut file
+  advanced option to convert it into full loadout file
   advanced option: randomizing gear?
   UI
    parser for default BIS export
@@ -75,8 +75,8 @@ class App extends React.Component {
 
     let newUniform = this.parseUniformFn(this.state.ExportArr)
     
-    let newLodaut = {newRifle,newHandgun,newLauncher,newUniform}
-    this.setState({Lodaut:newLodaut})
+    let newLoadout = {newRifle,newHandgun,newLauncher,newUniform}
+    this.setState({Loadout:newLoadout})
   }
   handleText=(event)=>{
     this.setState({ExportArr: event.target.value});
@@ -89,13 +89,13 @@ class App extends React.Component {
      <button onClick={this.convertFn}>test</button>
      <br/>
      <div>Rifle</div>
-     {this.state.Lodaut.newRifle !== undefined?(<pre> {JSON.stringify(this.state.Lodaut.newRifle)}</pre>):null}
+     {this.state.Loadout.newRifle !== undefined?(<pre> {JSON.stringify(this.state.Loadout.newRifle)}</pre>):null}
      <div>Secondary (RPG)</div>
-     {this.state.Lodaut.newLauncher !== undefined?(<pre> {JSON.stringify(this.state.Lodaut.newLauncher)}</pre>):null}
+     {this.state.Loadout.newLauncher !== undefined?(<pre> {JSON.stringify(this.state.Loadout.newLauncher)}</pre>):null}
      <div>Handgun</div>
-     {this.state.Lodaut.newHandgun !== undefined?(<pre> {JSON.stringify(this.state.Lodaut.newHandgun)}</pre>):null}
+     {this.state.Loadout.newHandgun !== undefined?(<pre> {JSON.stringify(this.state.Loadout.newHandgun)}</pre>):null}
      <div>Uniform</div>
-     {this.state.Lodaut.newUniform !== undefined?(<pre> {JSON.stringify(this.state.Lodaut.newUniform)}</pre>):null}
+     {this.state.Loadout.newUniform !== undefined?(<pre> {JSON.stringify(this.state.Loadout.newUniform)}</pre>):null}
    </div>
   );
   }
