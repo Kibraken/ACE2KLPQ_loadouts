@@ -1,6 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 
-let data = [
+let initData = [
 	[
 		'CUP_arifle_AK101_GL',
 		'RH_qdss_nt4',
@@ -61,26 +62,94 @@ let data = [
 		'CUP_NVG_PVS15_winter'
 	]
 ];
-/*
-[
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  "",
-  "",
-  [],
-  ["","","","","",""]
-]
-*/
-//[[],[],[],[],[],[],"","",[],["","","","","",""]]
+
+const Wrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+`;
+const BasicWrapper = styled.div`
+	background: tomato;
+`;
+const AdvWrapper = styled.div``;
+const OutputWrap = styled.div`
+	height: 180px;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+	padding-left: 10px;
+	width: fit-content;
+`;
+const DefaultInput = styled.textarea`
+	width: 99.6%;
+	height: 150px;
+	margin-top: 15px;
+`;
+const RifleMagsInput = styled.input`
+	width: 35px;
+`;
+const SidearmMagsInput = styled.input`
+	width: 35px;
+`;
+const RocketsInput = styled.input`
+	width: 35px;
+`;
+const MagsWrap = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
+`;
+const Mags = styled.div`
+	margin-left: 20px;
+`;
+
+const DefOutput = styled.pre`
+	background: transparent;
+	height: 20px;
+	width: 100%;
+	display: table-cell;
+	vertical-align: middle;
+	padding-left: 5px;
+	font-weight: 400;
+`;
+const Output = styled.div`
+	display: 'flex';
+	flex-flow: column;
+	height: 42px;
+	width: 100%;
+`;
+const OutputHeader = styled.div`
+	font-weight: 600;
+`;
+const DefUniformOutput = styled.pre``;
+
+const TopSwitchWrap = styled.div`
+	display: flex;
+	justify-content: space-between;
+	width: 150px;
+`;
+const TopSwitchBtnL = styled.div`
+	font-weight: 900;
+	background: tomato;
+	cursor: pointer;
+	border: 1px solid black;
+	border-bottom: none;
+`;
+const TopSwitchBtnR = styled.div`
+	font-weight: 900;
+	background: transparent;
+	cursor: pointer;
+	border: 1px solid black;
+	border-bottom: none;
+`;
 
 class App extends React.Component {
 	state = {
 		Loadout: {},
-		ExportArr: data
+		ExportArr: initData,
+		RifleMags: 10,
+		SidearmMags: 4,
+		RLrockets: 2
 	};
 	/*
   TODO  
@@ -111,7 +180,6 @@ class App extends React.Component {
 		});
 		return false;
 	};
-
 	parseGunsFn = (gun, mags) => {
 		let newArr = [];
 		gun.forEach((i, index) => {
@@ -165,24 +233,17 @@ class App extends React.Component {
 		});
 		return uniform;
 	};
-
 	convertFn = () => {
 		if (this.validateExp(this.state.ExportArr)) {
 			return alert('not valid');
 		}
-
-		//refactor
 		let rifle = this.state.ExportArr[0];
 		let launcher = this.state.ExportArr[1];
 		let handgun = this.state.ExportArr[2];
 
-		let rifleMags = 15;
-		let handgunMags = 4;
-		let rockets = 1;
-
-		let newRifle = this.parseGunsFn(rifle, rifleMags);
-		let newHandgun = this.parseGunsFn(handgun, handgunMags);
-		let newLauncher = this.parseGunsFn(launcher, rockets);
+		let newRifle = this.parseGunsFn(rifle, this.state.RifleMags);
+		let newHandgun = this.parseGunsFn(handgun, this.state.SidearmMags);
+		let newLauncher = this.parseGunsFn(launcher, this.state.RLrockets);
 
 		let newUniform = this.parseUniformFn(this.state.ExportArr);
 
@@ -193,38 +254,99 @@ class App extends React.Component {
 		let txt = JSON.parse(event.target.value);
 		this.setState({ ExportArr: txt });
 	};
+	handleNumInput = event => {
+		let mags = {};
+		mags[event.currentTarget.id] =
+			event.target.value !== '' ? parseInt(event.target.value) : 1;
+		this.setState({ ...mags });
+	};
 	render() {
 		return (
-			<div>
-				<textarea onChange={this.handleText}>
-					{JSON.stringify(this.state.ExportArr)}
-				</textarea>
-				<br />
-				<input></input>
-				<br />
-				<input></input>
-				<br />
-				<input></input>
-				<br />
-				<button onClick={this.convertFn}>test</button>
-				<br />
-				<div>Rifle</div>
-				{this.state.Loadout.newRifle !== undefined ? (
-					<pre> {JSON.stringify(this.state.Loadout.newRifle)}</pre>
-				) : null}
-				<div>Secondary (RPG)</div>
-				{this.state.Loadout.newLauncher !== undefined ? (
-					<pre> {JSON.stringify(this.state.Loadout.newLauncher)}</pre>
-				) : null}
-				<div>Handgun</div>
-				{this.state.Loadout.newHandgun !== undefined ? (
-					<pre> {JSON.stringify(this.state.Loadout.newHandgun)}</pre>
-				) : null}
-				<div>Uniform</div>
-				{this.state.Loadout.newUniform !== undefined ? (
-					<pre> {JSON.stringify(this.state.Loadout.newUniform)}</pre>
-				) : null}
-			</div>
+			<Wrapper>
+				<TopSwitchWrap>
+					<TopSwitchBtnL>BASIC</TopSwitchBtnL>
+					<TopSwitchBtnR>ADVANCED</TopSwitchBtnR>
+				</TopSwitchWrap>
+				<BasicWrapper>
+					<DefaultInput onChange={this.handleText}>
+						{JSON.stringify(this.state.ExportArr)}
+					</DefaultInput>
+
+					<Mags>
+						<MagsWrap>
+							<label htmlFor='RifleMags'>Rifle Mags</label>
+							<RifleMagsInput
+								type='number'
+								id='RifleMags'
+								value={this.state.RifleMags}
+								min='1'
+								max='50'
+								onChange={e => this.handleNumInput(e)}
+							></RifleMagsInput>
+						</MagsWrap>
+						<MagsWrap>
+							<label htmlFor='SidearmMags'>Sidearm Mags</label>
+							<SidearmMagsInput
+								type='number'
+								id='SidearmMags'
+								value={this.state.SidearmMags}
+								min='1'
+								max='30'
+								onChange={e => this.handleNumInput(e)}
+							></SidearmMagsInput>
+						</MagsWrap>
+						<MagsWrap>
+							<label htmlFor='RLrockets'>RL rockets</label>
+							<RocketsInput
+								type='number'
+								id='RLrockets'
+								value={this.state.RLrockets}
+								min='1'
+								max='5'
+								onChange={e => this.handleNumInput(e)}
+							></RocketsInput>
+						</MagsWrap>
+					</Mags>
+
+					<br />
+					<button onClick={this.convertFn}>test</button>
+					<br />
+					<OutputWrap>
+						<Output>
+							<OutputHeader>Rifle</OutputHeader>
+							<DefOutput>
+								{this.state.Loadout.newRifle !== undefined &&
+									this.state.Loadout.newRifle.length !== 0 &&
+									JSON.stringify(this.state.Loadout.newRifle) + `;`}
+							</DefOutput>
+						</Output>
+						<Output>
+							<OutputHeader>Secondary (Launcher)</OutputHeader>
+							<DefOutput>
+								{this.state.Loadout.newLauncher !== undefined &&
+									this.state.Loadout.newLauncher.length !== 0 &&
+									JSON.stringify(this.state.Loadout.newLauncher) + `;`}
+							</DefOutput>
+						</Output>
+						<Output>
+							<OutputHeader>Handgun</OutputHeader>
+							<DefOutput>
+								{this.state.Loadout.newHandgun !== undefined &&
+									this.state.Loadout.newHandgun.length !== 0 &&
+									JSON.stringify(this.state.Loadout.newHandgun) + `;`}
+							</DefOutput>
+						</Output>
+						<Output>
+							<OutputHeader>Uniform</OutputHeader>
+							<DefOutput>
+								{this.state.Loadout.newUniform !== undefined &&
+									this.state.Loadout.newUniform.length !== 0 &&
+									JSON.stringify(this.state.Loadout.newUniform) + `;`}
+							</DefOutput>
+						</Output>
+					</OutputWrap>
+				</BasicWrapper>
+			</Wrapper>
 		);
 	}
 }
