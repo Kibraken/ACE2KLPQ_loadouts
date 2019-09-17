@@ -1,148 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
-
-let initData = [
-	[
-		'CUP_arifle_AK101_GL',
-		'RH_qdss_nt4',
-		'rhs_acc_2dpZenit_ris',
-		'',
-		['CUP_30Rnd_556x45_AK', 30],
-		['CUP_1Rnd_HE_GP25_M', 1],
-		''
-	],
-	[],
-	[
-		'CUP_hgun_Glock17_blk',
-		'muzzle_snds_L',
-		'CUP_acc_Glock17_Flashlight',
-		'',
-		['CUP_17Rnd_9x19_glock17', 17],
-		[],
-		''
-	],
-	[
-		'CFP_U_Crye_M90',
-		[
-			['FirstAidKit', 1],
-			['Chemlight_green', 1, 1],
-			['CUP_17Rnd_9x19_glock17', 1, 17]
-		]
-	],
-	[
-		'CFP_FAPC_Operator_OGA_OD',
-		[
-			['MiniGrenade', 2, 1],
-			['SmokeShell', 1, 1],
-			['SmokeShellGreen', 1, 1],
-			['Chemlight_green', 1, 1],
-			['CUP_17Rnd_9x19_glock17', 2, 17]
-		]
-	],
-	[
-		'CFP_Kitbag_White',
-		[
-			['MineDetector', 1],
-			['DemoCharge_Remote_Mag', 5, 1],
-			['SatchelCharge_Remote_Mag', 1, 1],
-			['APERSTripMine_Wire_Mag', 1, 1],
-			['APERSMine_Range_Mag', 1, 1],
-			['CUP_1Rnd_HE_GP25_M', 4, 1]
-		]
-	],
-	'CFP_OPS2017_Helmet_White',
-	'CFP_Face_Wear_Spook',
-	['Binocular', '', '', '', [], [], ''],
-	[
-		'ItemMap',
-		'ItemGPS',
-		'ItemRadio',
-		'ItemCompass',
-		'ItemWatch',
-		'CUP_NVG_PVS15_winter'
-	]
-];
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: column;
-	padding: 20px;
-`;
-const BasicWrapper = styled.div`
-	background: tomato;
-`;
-const AdvWrapper = styled.div``;
-const OutputWrap = styled.div`
-	height: 180px;
-	display: flex;
-	flex-flow: column;
-	justify-content: space-between;
-	padding-left: 10px;
-	width: fit-content;
-`;
-const DefaultInput = styled.textarea`
-	width: 99.6%;
-	height: 150px;
-	margin-top: 15px;
-`;
-const RifleMagsInput = styled.input`
-	width: 35px;
-`;
-const SidearmMagsInput = styled.input`
-	width: 35px;
-`;
-const RocketsInput = styled.input`
-	width: 35px;
-`;
-const MagsWrap = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 150px;
-`;
-const Mags = styled.div`
-	margin-left: 20px;
-`;
-
-const DefOutput = styled.pre`
-	background: transparent;
-	height: 20px;
-	width: 100%;
-	display: table-cell;
-	vertical-align: middle;
-	padding-left: 5px;
-	font-weight: 400;
-`;
-const Output = styled.div`
-	display: 'flex';
-	flex-flow: column;
-	height: 42px;
-	width: 100%;
-`;
-const OutputHeader = styled.div`
-	font-weight: 600;
-`;
-const DefUniformOutput = styled.pre``;
-
-const TopSwitchWrap = styled.div`
-	display: flex;
-	justify-content: space-between;
-	width: 150px;
-`;
-const TopSwitchBtnL = styled.div`
-	font-weight: 900;
-	background: tomato;
-	cursor: pointer;
-	border: 1px solid black;
-	border-bottom: none;
-`;
-const TopSwitchBtnR = styled.div`
-	font-weight: 900;
-	background: transparent;
-	cursor: pointer;
-	border: 1px solid black;
-	border-bottom: none;
-`;
-
+import {
+	Wrapper,
+	BasicWrapper,
+	AdvWrapper,
+	OutputWrap,
+	DefaultInput,
+	RifleMagsInput,
+	SidearmMagsInput,
+	RocketsInput,
+	MagsWrap,
+	Mags,
+	DefOutput,
+	Output,
+	OutputHeader,
+	DefUniformOutput,
+	TopSwitchWrap,
+	TopSwitchBtnL,
+	TopSwitchBtnR
+} from './misc/components';
+import { initData } from './misc/data';
+//import * as misc from './misc';
 class App extends React.Component {
 	state = {
 		Loadout: {},
@@ -163,6 +40,7 @@ class App extends React.Component {
 
 	validateExp = data => {
 		//[[],[],[],[],[],[],"","",[],["","","","","",""]]
+		console.log(data);
 		if (data.length !== 10 || data[9].length !== 6) {
 			return console.log('not valid length'), true;
 		}
@@ -233,8 +111,8 @@ class App extends React.Component {
 		});
 		return uniform;
 	};
-	convertFn = () => {
-		if (this.validateExp(this.state.ExportArr)) {
+	convertFn = async () => {
+		if (await this.validateExp(this.state.ExportArr)) {
 			return alert('not valid');
 		}
 		let rifle = this.state.ExportArr[0];
