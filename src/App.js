@@ -190,15 +190,21 @@ class App extends React.Component {
 		this.setState({ Loadout: newLoadout });
 	};
 	handleText = event => {
-		this.setState({ ExportArr: event.target.value });
+		let txt = JSON.parse(event.target.value);
+		this.setState({ ExportArr: txt });
 	};
 	render() {
 		return (
 			<div>
-				<textarea
-					value={this.state.ExportArr}
-					onChange={this.handleText}
-				></textarea>
+				<textarea onChange={this.handleText}>
+					{JSON.stringify(this.state.ExportArr)}
+				</textarea>
+				<br />
+				<input></input>
+				<br />
+				<input></input>
+				<br />
+				<input></input>
 				<br />
 				<button onClick={this.convertFn}>test</button>
 				<br />
