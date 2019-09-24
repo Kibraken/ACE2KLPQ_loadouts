@@ -19,6 +19,7 @@ import {
 	TopSwitchBtnR
 } from './misc/components';
 import { initData } from './misc/data';
+import { sqfExport } from './sqfExport/';
 //import * as misc from './misc';
 class App extends React.Component {
 	state = {
@@ -111,6 +112,9 @@ class App extends React.Component {
 		});
 		return uniform;
 	};
+	exportFn = async () => {
+		sqfExport(this.state.Loadout);
+	};
 	convertFn = async () => {
 		if (await this.validateExp(this.state.ExportArr)) {
 			return alert('not valid');
@@ -188,6 +192,7 @@ class App extends React.Component {
 
 					<br />
 					<button onClick={this.convertFn}>test</button>
+					<button onClick={this.exportFn}>Export</button>
 					<br />
 					<OutputWrap>
 						<Output>
