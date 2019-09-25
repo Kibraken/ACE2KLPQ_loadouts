@@ -2,6 +2,7 @@
 // TODO: make proper generation, burn in hell forver for trying to do it otherwise
 import { template } from './sqfTemplate';
 
+// fashion = ["uniform_class_name", "vest", "hat", "backpack", "glasses"];
 function sqifyUniform (fashion) {
     let flatFashion = `[`;
     for(let i = 0; i < fashion.length; i++) {
@@ -14,18 +15,18 @@ function sqifyUniform (fashion) {
     
     return flatFashion;
 }
-
+// weapon = ["classname", [["ammo_classname", counter], ["secondary_ammo", counter]],["addons", "muzzle_device"]];
 function sqifyWeapon (weapon) {
-    let flatWeapon = `[`;
+    let flatWeapon = '[';
     
-    if( weapon[0] !== '' && weapon != null) {
-        flatWeapon += `"${weapon[0]}",`;
+    if( weapon[0] !== '' && weapon != null && weapon !== []) {
+        flatWeapon += `"${weapon[0]}", `;
     }
     else {
         return '[]';
     }
 
-    flatWeapon += '['
+    flatWeapon += '[';
 
     if( weapon[1] !== [] && weapon[1] != null) {
         if( weapon[1][0] !== [] && weapon[1][0] != null) {
@@ -107,49 +108,43 @@ export function sqfExport (loadout) {
     //  ]
     //];
 
-
-    let loadoutArray = `private _loadoutArray = [
-        [ // uniform, weapons per class`;
-    let exportData = `
-    private _basicMedicine = ${template.medicine};
-    private _advancedMedicine = ${template.medicine};
-    private _medicMedicine = ${template.medicine};
-    private _binoculars = ["Ace_VectorDay", [], []];
-    private _additionGrenade = "${template.smokeGrenade}";
-    private _fragGrenade = "${template.fragGrenade}";
-    private _items = [["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], [_additionGrenade, 3], ["ACE_CableTie", 2]];
-    private _linkItems = ["ItemMap", "ItemCompass", "ItemWatch", "ItemGPS"];
-    
-    `;
+    let loadoutArray = `\r\nprivate _loadoutArray = [\r\n\t[ // uniforms, weapons per class`;
+    let exportData = '';
+    exportData += `private _basicMedicine = ${template.medicine};\r\n`;
+    exportData += `private _advancedMedicine = ${template.medicine};\r\n`;
+    exportData += `private _medicMedicine = ${template.medicine};\r\n`;
+    exportData += `private _binoculars = ["Ace_VectorDay", [], []];\r\n`;
+    exportData += `private _additionGrenade = "${template.smokeGrenade}";\r\n`;
+    exportData += `private _fragGrenade = "${template.fragGrenade}";\r\n`;
+    exportData += `private _items = [["ACE_EarPlugs", 1], ["ACE_Flashlight_XL50", 1], [_additionGrenade, 3], ["ACE_CableTie", 2]];\r\n`;
+    exportData += `private _linkItems = ["ItemMap", "ItemCompass", "ItemWatch", "ItemGPS"];\r\n`;
 
     Object.entries(classes).forEach((element) => {
+        
         let index = element[0];
-        exportData += `
-        private _${index}Fashion = ${sqifyUniform(loadout.newUniform)};
-        private _${index}Primary = ${sqifyWeapon(loadout.newRifle)};
-        private _${index}Secondary = ${sqifyWeapon([loadout.newHandgun[0], [], loadout.newHandgun[1]])};
-        private _${index}Launcher = ${sqifyWeapon(loadout.newLauncher)};
-        `; // quick crutch, I know, I hate myself too
+        
+        exportData += `private _${index}Fashion = ${sqifyUniform(loadout.newUniform)};\r\n`;
+        exportData += `private _${index}Primary = ${sqifyWeapon(loadout.newRifle)};\r\n`;
+        exportData += `private _${index}Secondary = ${sqifyWeapon([loadout.newHandgun[0], [], loadout.newHandgun[1]])};\r\n`;
+        exportData += `private _${index}Launcher = ${sqifyWeapon(loadout.newLauncher)};\r\n\r\n`;
+         // quick crutch, I know, I hate myself too
         
         // I hope I will stay alive long enough to fix this eventually
-        console.log(`index:${element[0]}, value:${JSON.stringify(element[1])}`);
         let tagline = '';
         element[1].forEach(classname => {
-            tagline += '"'+classname+'", ';
+            tagline += ' "'+classname+'",';
         });
-        tagline.slice(0, -1);
-        loadoutArray += `
-        [
-            [${tagline}],
-            [
-                _${index}Fashion,
-                [_${index}Primary, _${index}Secondary, _${index}Launcher, _binoculars]
-            ]
-        ],
-        `;
+        
+        tagline = tagline.slice(0, -1);
+
+        loadoutArray += `\r\n\t[\r\n`;
+        loadoutArray += `\t\t[${tagline}],\r\n\t\t[\r\n`;
+        loadoutArray += `\t\t\t_${index}Fashion,\r\n`;
+        loadoutArray += `\t\t\t[_${index}Primary, _${index}Secondary, _${index}Launcher, _binoculars]\r\n`;
+        loadoutArray += `\t\t]\r\n\t],`;
     });
 
-    loadoutArray.slice(0, -1);
+    loadoutArray = loadoutArray.slice(0, -1);
     loadoutArray += '],';
     loadoutArray += `
     [ // equipment per class
