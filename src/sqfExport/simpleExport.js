@@ -18,7 +18,7 @@ function sqifyUniform (fashion) {
 function sqifyWeapon (weapon) {
     let flatWeapon = `[`;
     
-    if( weapon[0] !== '' && weapon != null) {
+    if( weapon[0] !== '' && weapon[0] !== false && weapon[0] !== undefined) {
         flatWeapon += `"${weapon[0]}",`;
     }
     else {
@@ -132,7 +132,6 @@ export function sqfExport (loadout) {
         `; // quick crutch, I know, I hate myself too
         
         // I hope I will stay alive long enough to fix this eventually
-        console.log(`index:${element[0]}, value:${JSON.stringify(element[1])}`);
         let tagline = '';
         element[1].forEach(classname => {
             tagline += '"'+classname+'", ';
