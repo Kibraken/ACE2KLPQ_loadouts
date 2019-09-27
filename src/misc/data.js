@@ -59,3 +59,174 @@ export let initData = [
 		'CUP_NVG_PVS15_winter'
 	]
 ];
+
+export let roles = {
+	squadLeader: {
+		className: 'officer',
+		classTags: ['squad leader'],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: true,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	combatLifeSaver: {
+		className: 'combat life saver',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	engineer: {
+		className: 'engineer',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	teamLeader: {
+		className: 'team leader',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	missileSpecialistAT: {
+		className: 'missile specialist (at)',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	missileSpecialistAA: {
+		className: 'missile specialist (aa)',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	autorifleman: {
+		className: 'autorifleman',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	riflemanAT: {
+		className: 'rifleman (at)',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	pilot: {
+		className: 'pilot',
+		classTags: ['helicopter pilot'],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	crewman: {
+		className: 'crewman',
+		classTags: ['helicopter crew'],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	grenadier: {
+		className: 'grenadier',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	},
+	rifleman: {
+		className: 'rifleman',
+		classTags: [],
+		classLoadout: {},
+		classOptions: {
+			binocular: false,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false
+		}
+	}
+};
