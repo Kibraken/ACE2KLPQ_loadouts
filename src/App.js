@@ -1,6 +1,7 @@
 import React from 'react';
 import { initData } from './misc/data';
 import Basic from './components/basic';
+import Advanced from './components/advanced';
 import { ParseLoadout } from './misc/parsConverter';
 import {
 	Wrapper,
@@ -46,14 +47,15 @@ class App extends React.Component {
 					<TopSwitchBtnL>BASIC</TopSwitchBtnL>
 					<TopSwitchBtnR>ADVANCED</TopSwitchBtnR>
 				</TopSwitchWrap>
-				<Basic
+				{/* <Basic
 					Loadout={this.state.Loadout}
 					ExportArr={this.state.ExportArr}
 					ammo={this.state.ammo}
 					handleText={this.handleText}
 					handleNumInput={this.handleNumInput}
 					basicConvert={this.basicConvert}
-				/>
+				/> */}
+				<Advanced />
 			</Wrapper>
 		);
 	}
