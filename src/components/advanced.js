@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { roles, additionaloptionsTemplate } from '../misc/data';
+import { roles, additionaloptionsTemplate, classTemplate } from '../misc/data';
+import { ParseLoadout } from '../misc/parsConverter';
+
 export const AdvancedMainWrap = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -79,7 +81,16 @@ export const ClassList = styled.div`
 	flex-flow: column;
 `;
 export const ClassWrap = styled.div`
-	background: ${props => (props.selected ? 'red' : 'transparent')};
+	background: ${props =>
+		props.converted && props.selected
+			? '#4fd20c'
+			: props.selected
+			? 'orange'
+			: props.converted
+			? 'green'
+			: !props.checked
+			? 'gray'
+			: 'transparent'};
 	cursor: pointer;
 `;
 export const Class = styled.span``;
@@ -153,10 +164,12 @@ const CheckboxContainer = styled.div`
 class Advanced extends React.Component {
 	state = {
 		checked: false,
+		importArr: false,
 		currentSelection: 'squadLeader',
 		classes: roles,
 		additionaloptions: additionaloptionsTemplate
 	};
+	//TODO: checkbox "keep this export after convertion"
 	handleCheckboxChange = id => {
 		let classes = { ...this.state.classes };
 		let { currentSelection } = this.state;
@@ -168,11 +181,15 @@ class Advanced extends React.Component {
 	handleCheckboxChangeClass = event => {
 		let classes = { ...this.state.classes };
 		let id = event.currentTarget.id.split('_')[0];
+		console.log(id);
+		console.log(event.currentTarget.id);
 		classes[id].classOptions.isChecked = !classes[id].classOptions.isChecked;
 
 		this.setState({ classes });
 	};
 	handleClassSelection = id => {
+		console.log(id);
+		console.log('selected', this.state.currentSelection);
 		let classes = { ...this.state.classes };
 		classes[id].classOptions.isSelected = !classes[id].classOptions.isSelected;
 		classes[this.state.currentSelection].classOptions.isSelected = false;
@@ -191,19 +208,63 @@ class Advanced extends React.Component {
 
 		this.setState({ additionaloptions });
 	};
+	advConvert = async () => {
+		let classes = { ...this.state.classes };
+		let { additionaloptions, importArr, currentSelection } = this.state;
+		if (importArr === false) {
+			return console.log('ebanulsya?');
+		}
+		let ammo = {
+			RifleMags: additionaloptions.rifleAmmo.amount,
+			SidearmMags: additionaloptions.sidearmAmmo.amount,
+			RLrockets: additionaloptions.rockets.amount
+		};
+		const convert = await new ParseLoadout(importArr, ammo);
+		classes[currentSelection].classLoadout = await convert.convertFn();
+		classes[currentSelection].classOptions.converted = true;
+
+		this.setState({ classes });
+		console.log('test', this.state.classes);
+	};
+	handleText = event => {
+		let txt = JSON.parse(event.target.value);
+		this.setState({ importArr: txt });
+	};
+	addNewRole = () => {
+		//classTemplate
+		let classes = { ...this.state.classes };
+		let num = Object.keys(classes).length - 11;
+		classes[`CustomRole${num}`] = { ...classTemplate };
+		classes[`CustomRole${num}`].className = `CustomClass${num}`;
+
+		this.setState({ classes });
+	};
 	render() {
-		const { classes, additionaloptions, currentSelection } = this.state;
+		const {
+			classes,
+			additionaloptions,
+			currentSelection,
+			importArr
+		} = this.state;
 		return (
 			<AdvancedMainWrap>
 				<InputWrap>
-					<LoadInput placeholder={'place ACE export here'}></LoadInput>
+					<LoadInput
+						placeholder={'place ACE export here'}
+						onChange={e => this.handleText(e)}
+						value={importArr ? JSON.stringify(importArr) : null}
+					>
+						{/* {importArr !== false && JSON.stringify(importArr)} */}
+					</LoadInput>
 					<Console>Loadout tips, warnings</Console>
 					<ClassInfoWrap>
 						<ClassInfoHeader>Selected class information</ClassInfoHeader>
 						<TextHeader>Class Name</TextHeader>
-						<ClassNameInput></ClassNameInput>
+						<ClassNameInput
+							value={classes[currentSelection].className}
+						></ClassNameInput>
 						<TextHeader>Class Tags</TextHeader>
-						<ClassTags></ClassTags>
+						<ClassTags value={classes[currentSelection].classTags}></ClassTags>
 					</ClassInfoWrap>
 					<ClassCheckboxesWrap>
 						<TextHeader>Additional class options:</TextHeader>
@@ -243,13 +304,15 @@ class Advanced extends React.Component {
 					</ClassCheckboxesWrap>
 				</InputWrap>
 				<ClassManagmentWrap>
-					<SaveToClass>SaveToClass</SaveToClass>
+					<SaveToClass onClick={() => this.advConvert()}>SaveToClass</SaveToClass>
 					<ClassList>
 						{Object.keys(classes).map(i => {
 							return (
 								<ClassWrap
 									key={i}
 									selected={classes[i].classOptions.isSelected}
+									checked={classes[i].classOptions.isChecked}
+									converted={classes[i].classOptions.converted}
 									onClick={() => this.handleClassSelection(i)}
 								>
 									<label>
@@ -264,9 +327,11 @@ class Advanced extends React.Component {
 								</ClassWrap>
 							);
 						})}
-						<AddNewClass>AddNewClass</AddNewClass>
+						<AddNewClass onClick={() => this.addNewRole()}>AddNewClass</AddNewClass>
 					</ClassList>
-					<DeleteClass>DeleteClass</DeleteClass>
+					<DeleteClass onClick={() => console.log('bepis', classes)}>
+						DeleteClass
+					</DeleteClass>
 				</ClassManagmentWrap>
 				<OutputWrap>
 					Output

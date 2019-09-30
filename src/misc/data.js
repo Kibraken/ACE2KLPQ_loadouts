@@ -332,3 +332,22 @@ export const additionaloptionsTemplate = {
 		isChecked: true
 	}
 };
+
+export const classTemplate = {
+	className: '',
+	classTags: [],
+	classLoadout: {},
+	classOptions: {
+		binocular: false,
+		gps: true,
+		radioSq: true,
+		radioFt: true,
+		isSelected: false,
+		isChecked: true,
+		mgMags: false,
+		converted: false,
+		nvg: false,
+		map: false,
+		compass: false
+	}
+};
