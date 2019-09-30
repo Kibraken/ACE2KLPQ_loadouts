@@ -181,7 +181,7 @@ class Advanced extends React.Component {
 	};
 	handleNumInput = (event, i, type) => {
 		let additionaloptions = { ...this.state.additionaloptions };
-		if (type === 'ammo') {
+		if (type === 'amount') {
 			additionaloptions[i][type] =
 				event.target.value !== '' ? parseInt(event.target.value) : 1;
 		} else {
