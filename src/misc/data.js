@@ -1,4 +1,4 @@
-export let initData = [
+export const initData = [
 	[
 		'CUP_arifle_AK101_GL',
 		'RH_qdss_nt4',
@@ -60,7 +60,7 @@ export let initData = [
 	]
 ];
 
-export let roles = {
+export const roles = {
 	squadLeader: {
 		className: 'officer',
 		classTags: ['squad leader'],
@@ -72,7 +72,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: true,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	combatLifeSaver: {
@@ -86,7 +90,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	engineer: {
@@ -100,7 +108,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	teamLeader: {
@@ -114,7 +126,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	missileSpecialistAT: {
@@ -128,7 +144,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	missileSpecialistAA: {
@@ -142,7 +162,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	autorifleman: {
@@ -156,7 +180,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	riflemanAT: {
@@ -170,7 +198,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	pilot: {
@@ -179,12 +211,16 @@ export let roles = {
 		classLoadout: {},
 		classOptions: {
 			binocular: false,
-			gps: true,
+			gps: false,
 			radioSq: true,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	crewman: {
@@ -198,7 +234,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	grenadier: {
@@ -212,7 +252,11 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
 	},
 	rifleman: {
@@ -226,7 +270,65 @@ export let roles = {
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: false,
+			compass: false
 		}
+	}
+};
+
+export const additionaloptionsTemplate = {
+	rifleAmmo: {
+		fieldName: 'rifle ammo',
+		amount: 15
+	},
+	sidearmAmmo: {
+		fieldName: 'sidearm ammo',
+		amount: 4
+	},
+	rockets: {
+		fieldName: 'rockets (will apply only for AT soldiers)',
+		amount: 2
+	},
+	mgMags: {
+		fieldName: 'mags for mg',
+		amount: 2,
+		isChecked: false
+	},
+	sidearm: {
+		fieldName: 'sidearm',
+		isChecked: false
+	},
+	gps: {
+		fieldName: 'gps',
+		isChecked: false
+	},
+	nvg: {
+		fieldName: 'nvg',
+		isChecked: true,
+		type: 'CUP_NVG_PVS15_winter'
+	},
+	map: {
+		fieldName: 'map',
+		isChecked: true
+	},
+	compass: {
+		fieldName: 'compass',
+		isChecked: true
+	},
+	binocular: {
+		fieldName: 'binocular',
+		type: 'Binocular',
+		isChecked: true
+	},
+	radioSq: {
+		fieldName: 'leaders radio',
+		isChecked: false
+	},
+	radioFt: {
+		fieldName: 'fireteam radio',
+		isChecked: true
 	}
 };

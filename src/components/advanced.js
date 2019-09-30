@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { roles } from '../misc/data';
+import { roles, additionaloptionsTemplate } from '../misc/data';
 export const AdvancedMainWrap = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -150,27 +150,21 @@ const CheckboxContainer = styled.div`
 	vertical-align: middle;
 `;
 
-const CheckboxNames = [
-	'rifle mags',
-	'sidearm mags',
-	'rockets',
-	'mg',
-	'gps',
-	'nvg',
-	'sidearm',
-	'binocular',
-	'radio sq',
-	'radio ft'
-];
-
 class Advanced extends React.Component {
 	state = {
 		checked: false,
 		currentSelection: 'squadLeader',
-		classes: roles
+		classes: roles,
+		additionaloptions: additionaloptionsTemplate
 	};
-	handleCheckboxChange = event =>
-		this.setState({ checked: event.target.checked });
+	handleCheckboxChange = id => {
+		let classes = { ...this.state.classes };
+		let { currentSelection } = this.state;
+		classes[currentSelection].classOptions[id] = !classes[currentSelection]
+			.classOptions[id];
+
+		this.setState({ classes });
+	};
 	handleCheckboxChangeClass = event => {
 		let classes = { ...this.state.classes };
 		let id = event.currentTarget.id.split('_')[0];
@@ -185,8 +179,20 @@ class Advanced extends React.Component {
 		//squadLeader
 		this.setState({ currentSelection: id, classes });
 	};
+	handleNumInput = (event, i, type) => {
+		let additionaloptions = { ...this.state.additionaloptions };
+		if (type === 'ammo') {
+			additionaloptions[i][type] =
+				event.target.value !== '' ? parseInt(event.target.value) : 1;
+		} else {
+			additionaloptions[i][type] =
+				event.target.value !== '' ? event.target.value : '_';
+		}
+
+		this.setState({ additionaloptions });
+	};
 	render() {
-		const { classes } = this.state;
+		const { classes, additionaloptions, currentSelection } = this.state;
 		return (
 			<AdvancedMainWrap>
 				<InputWrap>
@@ -201,14 +207,36 @@ class Advanced extends React.Component {
 					</ClassInfoWrap>
 					<ClassCheckboxesWrap>
 						<TextHeader>Additional class options:</TextHeader>
-						{CheckboxNames.map(i => {
+						{Object.keys(additionaloptions).map((i, index) => {
 							return (
 								<label key={i}>
-									<Checkbox
-										checked={this.state.checked}
-										onChange={this.handleCheckboxChange}
-									/>
-									<span>{i}</span>
+									{index < 3 ? (
+										<React.Fragment>
+											<ClassInfoHeader>{additionaloptions[i].fieldName}</ClassInfoHeader>
+											<input
+												type='number'
+												value={additionaloptions[i].amount}
+												min='1'
+												max={i === 'rifleAmmo' ? 50 : i === 'sidearmAmmo' ? 30 : 15}
+												onChange={e => this.handleNumInput(e, i, 'amount')}
+											></input>
+										</React.Fragment>
+									) : (
+										<React.Fragment>
+											<Checkbox
+												checked={classes[currentSelection].classOptions[i]}
+												onChange={() => this.handleCheckboxChange(i)}
+											/>
+											<span>{additionaloptions[i].fieldName}</span>
+										</React.Fragment>
+									)}
+									{additionaloptions[i].type &&
+										classes[currentSelection].classOptions[i] && (
+											<input
+												value={additionaloptions[i].type}
+												onChange={e => this.handleNumInput(e, i, 'type')}
+											></input>
+										)}
 								</label>
 							);
 						})}
@@ -250,5 +278,3 @@ class Advanced extends React.Component {
 }
 
 export default Advanced;
-
-//Rifleman:{ Rifle:[], Handgun:[], Launcher:[], Uniform:[], classname:"",tags:["",""], optional:{binocular:"binName",gps:true, mgMags:3} },
