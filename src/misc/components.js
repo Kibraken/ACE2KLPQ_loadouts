@@ -98,7 +98,10 @@ export const AdvOutputWrap = styled.div`
 	padding: 20px;
 `;
 export const TextHeader = styled.p`
-	margin: 5px;
+	margin: 0px;
+	font-weight: 500;
+	font-size: 14px;
+	padding-left: 5px;
 `;
 
 //InputWrap
@@ -121,7 +124,7 @@ export const ClassInfoHeader = styled.h5`
 export const ClassNameInput = styled.input`
 	color: palevioletred;
 	font-size: 1em;
-	margin: 1em;
+	margin: 0.2em;
 	padding: 0.25em 1em;
 	border: 2px solid palevioletred;
 	border-radius: 3px;
@@ -129,7 +132,7 @@ export const ClassNameInput = styled.input`
 export const ClassTags = styled.input`
 	color: palevioletred;
 	font-size: 1em;
-	margin: 1em;
+	margin: 0.2em;
 	padding: 0.25em 1em;
 	border: 2px solid palevioletred;
 	border-radius: 3px;
@@ -152,11 +155,14 @@ export const SaveToClass = styled.button`
 `;
 
 export const ClassList = styled.div`
-	width: 75%;
+	/* width: 75%; */
 	min-height: 250px;
-	background: #83be83;
+	background: #fbf3ff;
 	display: flex;
 	flex-flow: column;
+	padding: 20px;
+	border: 2px solid palevioletred;
+	border-radius: 12px;
 `;
 export const ClassWrap = styled.div`
 	background: ${props =>
@@ -171,7 +177,6 @@ export const ClassWrap = styled.div`
 			: 'transparent'};
 	cursor: pointer;
 `;
-export const Class = styled.span``;
 
 export const AddNewClass = styled.button`
 	color: palevioletred;
@@ -223,4 +228,8 @@ export const StyledCheckbox = styled.div`
 export const CheckboxContainer = styled.div`
 	display: inline-block;
 	vertical-align: middle;
+`;
+export const CheckboxText = styled.span`
+	padding-left: 5px;
+	font-weight: 500;
 `;

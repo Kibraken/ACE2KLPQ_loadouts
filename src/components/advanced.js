@@ -19,13 +19,13 @@ import {
 	SaveToClass,
 	ClassList,
 	ClassWrap,
-	Class,
 	AddNewClass,
 	DeleteClass,
 	Icon,
 	HiddenCheckbox,
 	StyledCheckbox,
-	CheckboxContainer
+	CheckboxContainer,
+	CheckboxText
 } from '../misc/components';
 
 //output shite
@@ -52,7 +52,7 @@ class Advanced extends React.Component {
 		additionaloptions: additionaloptionsTemplate,
 		saveImport: false
 	};
-	//TODO: checkbox "keep this export after convertion" fix textarea
+
 	handleCheckboxChange = id => {
 		let classes = { ...this.state.classes };
 		let { currentSelection } = this.state;
@@ -107,6 +107,12 @@ class Advanced extends React.Component {
 		const convert = await new ParseLoadout(importArr, ammo);
 		classes[currentSelection].classLoadout = await convert.convertFn();
 		classes[currentSelection].classOptions.converted = true;
+		if (classes[currentSelection].classOptions.nvg)
+			classes[currentSelection].classOptions.nvg = additionaloptions.nvg.type;
+		if (classes[currentSelection].classOptions.binocular)
+			classes[currentSelection].classOptions.binocular =
+				additionaloptions.binocular.type;
+
 		if (saveImport === true) {
 			this.setState({ classes });
 		} else {
@@ -136,7 +142,8 @@ class Advanced extends React.Component {
 	};
 	addNewRole = () => {
 		let classes = { ...this.state.classes };
-		let num = Object.keys(classes).length - 11;
+		let num = Object.keys(classes).length - 11; //bad hardcode, i hope initial length will be static
+
 		classes[`CustomRole${num}`] = {
 			className: '',
 			classTags: [],
@@ -159,7 +166,23 @@ class Advanced extends React.Component {
 		this.setState({ classes });
 	};
 	saveThisimport = () => this.setState({ saveImport: !this.state.saveImport });
-	exportToFile = () => {};
+	exportToFile = () => {
+		let exportObj = {};
+		let classes = { ...this.state.classes };
+		Object.keys(classes).some((i, index) => {
+			if (classes[i].classOptions.isChecked && !classes[i].classOptions.converted)
+				return (
+					console.log('not all checked roles has converted loadouts'),
+					(exportObj = false),
+					true
+				);
+			if (classes[i].classOptions.isChecked && classes[i].classOptions.converted)
+				exportObj = { ...exportObj, [i]: classes[i] };
+		});
+		console.log('exportObj', exportObj);
+
+		//look here corovan
+	};
 
 	render() {
 		const {
@@ -186,7 +209,7 @@ class Advanced extends React.Component {
 					<Console>Loadout tips, warnings</Console>
 					<ClassInfoWrap>
 						<ClassInfoHeader>Selected class information</ClassInfoHeader>
-						<TextHeader>Class Name</TextHeader>
+						<TextHeader>Ingame Class Name:</TextHeader>
 						<ClassNameInput
 							value={
 								classes[currentSelection].className
@@ -195,7 +218,7 @@ class Advanced extends React.Component {
 							}
 							onChange={e => this.handleText(e, 'class')}
 						></ClassNameInput>
-						<TextHeader>Class Tags</TextHeader>
+						<TextHeader>Additional Class Tags:</TextHeader>
 						<ClassTags
 							value={classes[currentSelection].classTags}
 							onChange={e => this.handleText(e, 'class+')}
@@ -223,7 +246,10 @@ class Advanced extends React.Component {
 												checked={classes[currentSelection].classOptions[i]}
 												onChange={() => this.handleCheckboxChange(i)}
 											/>
-											<span>{additionaloptions[i].fieldName}</span>
+											<CheckboxText>
+												{additionaloptions[i].fieldName}
+												{'         '}
+											</CheckboxText>
 										</React.Fragment>
 									)}
 									{additionaloptions[i].type &&
@@ -239,7 +265,9 @@ class Advanced extends React.Component {
 					</ClassCheckboxesWrap>
 				</InputWrap>
 				<ClassManagmentWrap>
-					<SaveToClass onClick={() => this.advConvert()}>SaveToClass</SaveToClass>
+					<SaveToClass onClick={() => this.advConvert()}>
+						convert ACE export and save to the selected class
+					</SaveToClass>
 					<ClassList>
 						{Object.keys(classes).map((i, index) => {
 							return (
@@ -259,19 +287,21 @@ class Advanced extends React.Component {
 											id={i}
 										/>
 									</label>
-									<Class>{classes[i].className}</Class>
+									<CheckboxText>{classes[i].className}</CheckboxText>
 								</ClassWrap>
 							);
 						})}
-						<AddNewClass onClick={() => this.addNewRole()}>AddNewClass</AddNewClass>
+						<AddNewClass onClick={() => this.addNewRole()}>Add New Class</AddNewClass>
 					</ClassList>
-					<DeleteClass onClick={() => console.log('bepis', classes)}>
+					{/* <DeleteClass onClick={() => console.log('bepis', classes)}>
 						DeleteClass
-					</DeleteClass>
+					</DeleteClass> */}
 				</ClassManagmentWrap>
 				<AdvOutputWrap>
 					Output
-					<OutputLoadout>export to file</OutputLoadout>
+					<OutputLoadout onClick={() => this.exportToFile()}>
+						export to file
+					</OutputLoadout>
 				</AdvOutputWrap>
 			</AdvancedMainWrap>
 		);
