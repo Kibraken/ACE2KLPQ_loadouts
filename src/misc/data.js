@@ -66,7 +66,7 @@ export const roles = {
 		classTags: ['squad leader'],
 		classLoadout: {},
 		classOptions: {
-			binocular: false,
+			binocular: true,
 			gps: true,
 			radioSq: true,
 			radioFt: true,
@@ -74,9 +74,9 @@ export const roles = {
 			isChecked: true,
 			mgMags: false,
 			converted: false,
-			nvg: false,
-			map: false,
-			compass: false
+			nvg: true,
+			map: true,
+			compass: true
 		}
 	},
 	combatLifeSaver: {
@@ -86,15 +86,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	engineer: {
@@ -104,15 +104,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	teamLeader: {
@@ -120,7 +120,7 @@ export const roles = {
 		classTags: [],
 		classLoadout: {},
 		classOptions: {
-			binocular: false,
+			binocular: true,
 			gps: true,
 			radioSq: true,
 			radioFt: true,
@@ -129,8 +129,8 @@ export const roles = {
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	missileSpecialistAT: {
@@ -140,15 +140,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	missileSpecialistAA: {
@@ -158,15 +158,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	autorifleman: {
@@ -176,15 +176,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false,
+			mgMags: true,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	riflemanAT: {
@@ -194,38 +194,20 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false,
+			mgMags: true,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	pilot: {
 		className: 'pilot',
 		classTags: ['helicopter pilot'],
-		classLoadout: {},
-		classOptions: {
-			binocular: false,
-			gps: false,
-			radioSq: true,
-			radioFt: true,
-			isSelected: false,
-			isChecked: true,
-			mgMags: false,
-			converted: false,
-			nvg: false,
-			map: false,
-			compass: false
-		}
-	},
-	crewman: {
-		className: 'crewman',
-		classTags: ['helicopter crew'],
 		classLoadout: {},
 		classOptions: {
 			binocular: false,
@@ -237,8 +219,26 @@ export const roles = {
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
+		}
+	},
+	crewman: {
+		className: 'crewman',
+		classTags: ['helicopter crew'],
+		classLoadout: {},
+		classOptions: {
+			binocular: true,
+			gps: true,
+			radioSq: true,
+			radioFt: true,
+			isSelected: false,
+			isChecked: true,
+			mgMags: false,
+			converted: false,
+			nvg: false,
+			map: true,
+			compass: true
 		}
 	},
 	grenadier: {
@@ -248,15 +248,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
 			mgMags: false,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	},
 	rifleman: {
@@ -266,15 +266,15 @@ export const roles = {
 		classOptions: {
 			binocular: false,
 			gps: true,
-			radioSq: true,
+			radioSq: false,
 			radioFt: true,
 			isSelected: false,
 			isChecked: true,
-			mgMags: false,
+			mgMags: true,
 			converted: false,
 			nvg: false,
-			map: false,
-			compass: false
+			map: true,
+			compass: true
 		}
 	}
 };

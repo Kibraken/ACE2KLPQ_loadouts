@@ -18,8 +18,7 @@ class App extends React.Component {
 	};
 	/*
   TODO    
-  advanced mode for several uniforms at once
-  advanced option to convert it into full loadout file
+  
   advanced option: randomizing gear?
   UI
    parser for default BIS export
