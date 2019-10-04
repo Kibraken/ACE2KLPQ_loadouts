@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { roles, additionaloptionsTemplate } from '../misc/data';
+import { roles, additionaloptionsTemplate, initData } from '../misc/data';
 import { ParseLoadout } from '../misc/parsConverter';
 
 import {
@@ -46,7 +46,7 @@ const Checkbox = ({ className, checked, ...props }) => (
 class Advanced extends React.Component {
 	state = {
 		checked: false,
-		importArr: '',
+		importArr: initData,
 		currentSelection: 'squadLeader',
 		classes: roles,
 		additionaloptions: additionaloptionsTemplate,
@@ -84,7 +84,7 @@ class Advanced extends React.Component {
 
 		this.setState({ additionaloptions });
 	};
-	advConvert = async () => {
+	advConvert = async testSelection => {
 		let classes = { ...this.state.classes };
 		let {
 			additionaloptions,
@@ -92,6 +92,7 @@ class Advanced extends React.Component {
 			currentSelection,
 			saveImport
 		} = this.state;
+		if (testSelection) currentSelection = testSelection;
 		try {
 			importArr = JSON.parse(importArr);
 			if (typeof importArr !== 'object') throw new Error('not an array');
@@ -183,7 +184,16 @@ class Advanced extends React.Component {
 
 		//look here corovan
 	};
+	componentDidMount() {
+		this.setState({ importArr: JSON.stringify(initData) });
+	}
+	testFill = () => {
+		const classes = { ...this.state.classes };
 
+		Object.keys(classes).forEach(i => {
+			this.advConvert(i);
+		});
+	};
 	render() {
 		const {
 			classes,
@@ -301,6 +311,9 @@ class Advanced extends React.Component {
 					Output
 					<OutputLoadout onClick={() => this.exportToFile()}>
 						export to file
+					</OutputLoadout>
+					<OutputLoadout onClick={() => this.testFill()}>
+						fill all roles
 					</OutputLoadout>
 				</AdvOutputWrap>
 			</AdvancedMainWrap>
