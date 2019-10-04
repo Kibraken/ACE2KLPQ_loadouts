@@ -2,8 +2,8 @@ export function sqfExport(classes, options) {
     let exportObject = {};
 
     let loadoutVars = '';
-    let loadoutArray = `private _loadoutArray = [\r\n[\r\n`;
-    let equipmentArray = `// Equipment per class\r\n[\r\b`;
+    let loadoutArray = `private _loadoutArray = [\r\n[\r\n // Uniforms per class`;
+    let equipmentArray = `// Equipment per class\r\n[\r\n`;
     
     Object.entries(classes).forEach((entry) => {
         
@@ -20,7 +20,7 @@ export function sqfExport(classes, options) {
         // Fashion(or your clothes)
         // private _${className}Fashion = ["uniform_class_name", "vest", "hat", "backpack", "glasses"];
         let [uniform, vest, headgear, backpack, glasses] = classLoadout.newUniform;
-        loadoutVars += `private _${classVar}Fashion = ["${uniform}", "${vest}", "${headgear}", "${backpack}", "${glasses}"]; \r\n`;
+        loadoutVars += `private _${classVar}Fashion = ["${uniform}", "${vest}", "${headgear}", "${backpack}", "${glasses}"];\r\n`;
 
         // Primary weapon
         // private _${className}Primary = ["weapon_class_name", [[primary mags], [secondary mags]], [addons]];
@@ -37,10 +37,21 @@ export function sqfExport(classes, options) {
         // Special items and misc.
         // private _${classVar}Items = [["item name", amount]];
         let classItems = ``;
-        let classLinkItems = '';
-        if(classOptions.binocular) { classItems += `"${classOptions.binocular}", ` }
+        let classLinkItems = ``;
+        //let classBinoculars;
+        if(classOptions.binocular) { classItems += `["${classOptions.binocular}", 1], `; }
+        if(classOptions.compass) { classLinkItems += `"ItemCompass", `; }
+        if(classOptions.gps) { classLinkItems += `"ItemGPS", `; }
+        if(classOptions.map) { classLinkItems += `"ItemMap", `; }
+        //if(classOptions.mgMags) { classItems += `["${mgMags}"]`; }
+        if(classOptions.nvg) { classLinkItems += `"${classOptions.nvg}", `; }
+        if(classOptions.radioFt) { classItems += `["${classOptions.radioFt}", 1], `; }
+        if(classOptions.radioSq) { classItems += `["${classOptions.radioSq}", 1], `;}
 
-        loadoutVars += `private _${classVar}Items = [];\r\n`;
+        classItems = classItems.trimRight().slice(0, -1);
+        classLinkItems = classLinkItems.trimRight().slice(0, -1);
+        loadoutVars += `private _${classVar}Items = [${classItems}];\r\n`;
+        loadoutVars += `private _${classVar}LinkItems = [${classLinkItems}];\r\n\r\n`;
 
         // Class loadout put together
         let loadoutName = `"${className}", `;
@@ -50,14 +61,18 @@ export function sqfExport(classes, options) {
             });
         }
         loadoutName = loadoutName.trimRight().slice(0, -1);
-        loadoutArray += `\r\n[\r\n    [${loadoutName}],\r\n    [_${classVar}Primary, _${classVar}Secondary, _${classVar}Launcher]\r\n],`;
+        loadoutArray += `\r\n  [\r\n    [${loadoutName}],\r\n    [_${classVar}Primary, _${classVar}Secondary, _${classVar}Launcher]\r\n  ],`;
+
+        // Class equipment 
+        equipmentArray += `\r\n  [\r\n    [${loadoutName}],\r\n    [_${classVar}Items],\r\n    [_${classVar}LinkItems]\r\n  ],`;
         
     });
 
-    loadoutArray = loadoutArray.trimRight().slice(0,-1) + "\r\n], ";
+    loadoutArray = loadoutArray.trimRight().slice(0,-1);
+    equipmentArray = equipmentArray.trimRight().slice(0, -1);
+    loadoutArray = loadoutArray + "\r\n], " + equipmentArray + "\r\n],\r\n// Personal items per class\r\n _boxItems + _boxMedicine, \r\n_identity \r\n];";
 
-    console.log(loadoutVars, loadoutArray);
-    exportObject.sqf = loadoutVars + loadoutArray;
-
+    exportObject.sqf = loadoutVars + "\r\n" + loadoutArray;
+    console.log(exportObject.sqf);
     return exportObject;
 }
