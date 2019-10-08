@@ -1,10 +1,29 @@
+import { template } from './sqfTemplate';
+
 export function sqfExport(classes, options) {
     let exportObject = {};
 
     let loadoutVars = '';
     let loadoutArray = `private _loadoutArray = [\r\n[\r\n // Uniforms per class`;
     let equipmentArray = `// Equipment per class\r\n[\r\n`;
+    let mgMags = '';
+    let medicItems = '';
+
     
+
+    // Template constants 
+    loadoutVars += `private _basicMedicine = ${template.medicine};\r\n`;
+    loadoutVars += `private _advancedMedicine = ${template.advancedMedicine};\r\n`;
+
+    // Going through additional options
+    if(options.medicine === 'advanced') {
+        loadoutVars += `private _medicine = [${template.advancedMedicine}];\r\n`;
+        loadoutVars += `private _medicItems = [${template.medicAdvancedMedicine}];\r\n`;            
+    } else {
+        loadoutVars += `private _medicine = [${template.medicine}];\r\n`;
+        loadoutVars += `private _medicItems = [${template.medicMedicine}];\r\n`;
+    }
+
     Object.entries(classes).forEach((entry) => {
         
         let defaultOptions = [];
@@ -47,6 +66,7 @@ export function sqfExport(classes, options) {
         if(classOptions.nvg) { classLinkItems += `"${classOptions.nvg}", `; }
         if(classOptions.radioFt) { classItems += `["${classOptions.radioFt}", 1], `; }
         if(classOptions.radioSq) { classItems += `["${classOptions.radioSq}", 1], `;}
+        if(classVar === 'combatLifeSaver' || classVar === 'medic') {}
 
         classItems = classItems.trimRight().slice(0, -1);
         classLinkItems = classLinkItems.trimRight().slice(0, -1);
@@ -71,6 +91,7 @@ export function sqfExport(classes, options) {
     loadoutArray = loadoutArray.trimRight().slice(0,-1);
     equipmentArray = equipmentArray.trimRight().slice(0, -1);
     loadoutArray = loadoutArray + "\r\n], " + equipmentArray + "\r\n],\r\n// Personal items per class\r\n _boxItems + _boxMedicine, \r\n_identity \r\n];";
+    loadoutArray += loadoutArray + `\r\n//output of the function, do not remove or change\r\n_loadoutArray`;
 
     exportObject.sqf = loadoutVars + "\r\n" + loadoutArray;
     console.log(exportObject.sqf);
