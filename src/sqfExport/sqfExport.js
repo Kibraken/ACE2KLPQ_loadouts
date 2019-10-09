@@ -3,13 +3,17 @@ import { template } from './sqfTemplate';
 export function sqfExport(classes, options) {
     let exportObject = {};
 
-    let loadoutVars = '';
+    let loadoutVars = ``;
     let loadoutArray = `private _loadoutArray = [\r\n[\r\n // Uniforms per class`;
     let equipmentArray = `// Equipment per class\r\n[\r\n`;
-    let mgMags = '';
-    let medicItems = '';
+    let boxItems = ` private _boxItems = [`;
+    let boxMedicine = `private _boxMedicine = [`;
 
-    
+    let mgMags = ``;
+    let medicItems = ``;
+    let lat = ``;
+    let fragGrenade = `HandGrenade`;
+    let smokeGrenade = `SmokeShellBlue`;
 
     // Template constants 
     loadoutVars += `private _basicMedicine = ${template.medicine};\r\n`;
@@ -18,12 +22,20 @@ export function sqfExport(classes, options) {
     // Going through additional options
     if(options.medicine === 'advanced') {
         loadoutVars += `private _medicine = [${template.advancedMedicine}];\r\n`;
-        loadoutVars += `private _medicItems = [${template.medicAdvancedMedicine}];\r\n`;            
+        loadoutVars += `private _medicItems = [${template.medicAdvancedMedicine}];\r\n\r\n`;            
     } else {
         loadoutVars += `private _medicine = [${template.medicine}];\r\n`;
-        loadoutVars += `private _medicItems = [${template.medicMedicine}];\r\n`;
+        loadoutVars += `private _medicItems = [${template.medicMedicine}];\r\n\r\n`;
     }
 
+    if(options.fragGrenade) {
+        fragGrenade = options.fragGrenade;
+    }
+    if(options.smokeGrenade) {
+        smokeGrenade = options.smokeGrenade;
+    }
+
+    // Process classes
     Object.entries(classes).forEach((entry) => {
         
         let defaultOptions = [];
@@ -34,7 +46,7 @@ export function sqfExport(classes, options) {
         let classOptions = entry[1].classOptions || defaultOptions;
         let classLoadout = entry[1].classLoadout || [];
         
-        console.log(classOptions);
+        
 
         // Fashion(or your clothes)
         // private _${className}Fashion = ["uniform_class_name", "vest", "hat", "backpack", "glasses"];
@@ -66,7 +78,18 @@ export function sqfExport(classes, options) {
         if(classOptions.nvg) { classLinkItems += `"${classOptions.nvg}", `; }
         if(classOptions.radioFt) { classItems += `["${classOptions.radioFt}", 1], `; }
         if(classOptions.radioSq) { classItems += `["${classOptions.radioSq}", 1], `;}
-        if(classVar === 'combatLifeSaver' || classVar === 'medic') {}
+
+        // Dirty hacks to catch a few variables 
+        if((classVar === 'autorifleman' || classVar === 'lmg' || classVar === 'machineGunner') && 
+            (classLoadout.newRifle[1][0].length > 0)) {
+            mgMags = classLoadout.newRifle[1][0];
+        }
+        // Note: this is a crude override, figure out something better
+        if(classVar === 'combatLifeSaver' || classVar === 'medic') { classItems += `${template.medicMedicine}, `}
+        // If you are a rifleman, this won't make life worse, this will just put you in your place
+        if(classVar === 'rifleman' && mgMags.length > 0) { classItems += `["${mgMags}", 2], `}
+
+        if(classVar === 'riflemanAT' && lat.length < 0) { lat = classLoadout.newLauncher[0]; }
 
         classItems = classItems.trimRight().slice(0, -1);
         classLinkItems = classLinkItems.trimRight().slice(0, -1);
@@ -88,12 +111,26 @@ export function sqfExport(classes, options) {
         
     });
 
+    // Box Items
+    boxItems += template.boxItems + ", ";
+    boxItems += `["${fragGrenade}", 20], `;
+    boxItems += `["${smokeGrenade}", 20], `;
+    if(lat.length > 0) { boxItems += `["${lat}", 20]`}
+    boxItems = boxItems.trimRight().slice(0, -1) + '];\r\n';
+
+    boxMedicine += template.medicine + "];\r\n";
+
     loadoutArray = loadoutArray.trimRight().slice(0,-1);
     equipmentArray = equipmentArray.trimRight().slice(0, -1);
     loadoutArray = loadoutArray + "\r\n], " + equipmentArray + "\r\n],\r\n// Personal items per class\r\n _boxItems + _boxMedicine, \r\n_identity \r\n];";
-    loadoutArray += loadoutArray + `\r\n//output of the function, do not remove or change\r\n_loadoutArray`;
+    loadoutArray += `\r\n//output of the function, do not remove or change\r\n_loadoutArray`;
 
-    exportObject.sqf = loadoutVars + "\r\n" + loadoutArray;
+    exportObject.sqf = 
+        loadoutVars + "\r\n"
+        + boxItems + "\r\n"
+        + boxMedicine + "\r\n"
+        + loadoutArray + + "\r\n";
+    
     console.log(exportObject.sqf);
     return exportObject;
 }
