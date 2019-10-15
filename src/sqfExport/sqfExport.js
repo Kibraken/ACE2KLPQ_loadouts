@@ -51,7 +51,7 @@ export function sqfExport(classes, options) {
         // Fashion(or your clothes)
         // private _${className}Fashion = ["uniform_class_name", "vest", "hat", "backpack", "glasses"];
         let [uniform, vest, headgear, backpack, glasses] = classLoadout.newUniform;
-        loadoutVars += `private _${classVar}Fashion = ["${uniform}", "${vest}", "${headgear}", "${backpack}", "${glasses}"];\r\n`;
+        loadoutVars += `private _${classVar}Fashion = ["${uniform}", "${vest}", "${backpack}", "${headgear}", "${glasses}"];\r\n`;
 
         // Primary weapon
         // private _${className}Primary = ["weapon_class_name", [[primary mags], [secondary mags]], [addons]];
@@ -104,10 +104,10 @@ export function sqfExport(classes, options) {
             });
         }
         loadoutName = loadoutName.trimRight().slice(0, -1);
-        loadoutArray += `\r\n  [\r\n    [${loadoutName}],\r\n    [_${classVar}Primary, _${classVar}Secondary, _${classVar}Launcher]\r\n  ],`;
+        loadoutArray += `\r\n  [\r\n    [${loadoutName}],\r\n[\r\n    _${classVar}Fashion,\r\n    [_${classVar}Primary, _${classVar}Secondary, _${classVar}Launcher]\r\n]\r\n],\r\n`;
 
         // Class equipment 
-        equipmentArray += `\r\n  [\r\n    [${loadoutName}],\r\n    [_${classVar}Items],\r\n    [_${classVar}LinkItems]\r\n  ],`;
+        equipmentArray += `\r\n  [\r\n    [${loadoutName}],\r\n    _${classVar}Items,\r\n    _${classVar}LinkItems\r\n  ],`;
         
     });
 
@@ -123,14 +123,14 @@ export function sqfExport(classes, options) {
     loadoutArray = loadoutArray.trimRight().slice(0,-1);
     equipmentArray = equipmentArray.trimRight().slice(0, -1);
     loadoutArray = loadoutArray + "\r\n], " + equipmentArray + "\r\n],\r\n// Personal items per class\r\n _boxItems + _boxMedicine, \r\n_identity \r\n];";
-    loadoutArray += `\r\n//output of the function, do not remove or change\r\n_loadoutArray`;
+    loadoutArray += `\r\n//output of the function, do not remove or change\r\n_loadoutArray\r\n`;
 
     exportObject.sqf = 
         loadoutVars + "\r\n"
         + boxItems + "\r\n"
         + boxMedicine + "\r\n"
-        + loadoutArray + + "\r\n";
+        + loadoutArray + + "\r\n\r\n";
     
-    console.log(exportObject.sqf);
+    //console.log();
     return exportObject;
 }
