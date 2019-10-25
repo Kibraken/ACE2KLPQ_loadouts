@@ -3,6 +3,7 @@ import { template } from './sqfTemplate';
 export function sqfExport(classes, options) {
     let exportObject = {};
 
+    let loadoutSide = ``;
     let loadoutVars = ``;
     let loadoutArray = `private _loadoutArray = [\r\n[\r\n // Uniforms per class`;
     let equipmentArray = `// Equipment per class\r\n[\r\n`;
@@ -20,6 +21,13 @@ export function sqfExport(classes, options) {
     loadoutVars += `private _advancedMedicine = ${template.advancedMedicine};\r\n`;
 
     // Going through additional options
+    if(!options.side) {
+        loadoutSide = 'WEST';
+    } else
+    {
+        loadoutSide = options.side;
+    }
+
     if(options.medicine === 'advanced') {
         loadoutVars += `private _medicine = [${template.advancedMedicine}];\r\n`;
         loadoutVars += `private _medicItems = [${template.medicAdvancedMedicine}];\r\n\r\n`;            
@@ -132,5 +140,7 @@ export function sqfExport(classes, options) {
         + loadoutArray + + "\r\n\r\n";
     
     //console.log();
+
+    exportObject.filename = 'fn_loadout' + loadoutSide.charAt(0).toUpperCase() + loadoutSide.slice(1).toLowerCase() + '.sqf';
     return exportObject;
 }
