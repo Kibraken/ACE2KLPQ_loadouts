@@ -27,6 +27,7 @@ import {
 	CheckboxContainer,
 	CheckboxText
 } from '../misc/components';
+import { sqfExport } from '../sqfExport';
 
 //output shite
 
@@ -182,7 +183,15 @@ class Advanced extends React.Component {
 		});
 		console.log('exportObj', exportObj);
 
-		//look here corovan
+		//looking good, Corovan
+		if(exportObj) { 
+			let exportFile = sqfExport(exportObj, this.state.additionaloptions);
+			
+			// exportFile {
+			// 	sqf: <sqf data>	
+			//  filename: <sqf filename>
+			// }
+		}
 	};
 	componentDidMount() {
 		this.setState({ importArr: JSON.stringify(initData) });

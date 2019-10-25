@@ -1,0 +1,16 @@
+Modules to rip off from     
+https://www.npmjs.com/package/ace3-functions-reader
+https://www.npmjs.com/package/arma-server
+https://www.npmjs.com/package/gulp-armapbo
+https://www.npmjs.com/package/makepbo
+https://www.npmjs.com/package/json-to-sqm
+https://www.npmjs.com/package/arma-class-parser
+https://www.npmjs.com/package/arma-config-parser
+
+
+Misc to look at 
+https://www.npmjs.com/package/nodebb-plugin-arma3-slotting
+https://www.npmjs.com/package/arma3sync-lib
+https://www.npmjs.com/package/battletracker-web-renderer
+https://www.npmjs.com/package/armasquads
+https://www.npmjs.com/package/rpt-scroll

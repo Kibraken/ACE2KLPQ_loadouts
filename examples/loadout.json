@@ -1,0 +1,51 @@
+{
+    "newRifle": [
+        "CUP_arifle_AK101_GL",
+        [
+            [
+                "CUP_30Rnd_556x45_AK",
+                15
+            ],
+            [
+                "CUP_1Rnd_HE_GP25_M",
+                15
+            ]
+        ],
+        [
+            "RH_qdss_nt4",
+            "rhs_acc_2dpZenit_ris"
+        ]
+    ],
+    "newHandgun": [
+        "CUP_hgun_Glock17_blk",
+        [
+            [
+                "CUP_17Rnd_9x19_glock17",
+                4
+            ]
+        ],
+        [
+            "muzzle_snds_L",
+            "CUP_acc_Glock17_Flashlight"
+        ]
+    ],
+    "newLauncher": [],
+    "newUniform": [
+        "CFP_U_Crye_M90",
+        "CFP_FAPC_Operator_OGA_OD",
+        "CFP_Kitbag_White",
+        "CFP_OPS2017_Helmet_White",
+        "CFP_Face_Wear_Spook"
+    ]
+},
+binocular: "Binocular"
+compass: true
+converted: true
+gps: true
+isChecked: true
+isSelected: true
+map: true
+mgMags: false
+nvg: "CUP_NVG_PVS15_winter"
+radioFt: true
+radioSq: true
