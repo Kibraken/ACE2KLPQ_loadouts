@@ -84,6 +84,9 @@ export const TopSwitchBtnR = styled.div`
 export const AdvancedMainWrap = styled.div`
 	display: flex;
 	flex-direction: row;
+	/* colors */
+	/* background: #0b1022; */
+	background: #02040c;
 `;
 export const InputWrap = styled.div`
 	width: 350px;
@@ -102,6 +105,8 @@ export const TextHeader = styled.p`
 	font-weight: 500;
 	font-size: 14px;
 	padding-left: 5px;
+	/* colors */
+	color: white;
 `;
 
 //InputWrap
@@ -120,21 +125,23 @@ export const ClassInfoWrap = styled.div`
 `;
 export const ClassInfoHeader = styled.h5`
 	margin: 5px;
+	/* colors */
+	color: white;
 `;
 export const ClassNameInput = styled.input`
-	color: palevioletred;
+	color: black;
 	font-size: 1em;
 	margin: 0.2em;
 	padding: 0.25em 1em;
-	border: 2px solid palevioletred;
+	border: 2px solid whitesmoke;
 	border-radius: 3px;
 `;
 export const ClassTags = styled.input`
-	color: palevioletred;
+	color: black;
 	font-size: 1em;
 	margin: 0.2em;
 	padding: 0.25em 1em;
-	border: 2px solid palevioletred;
+	border: 2px solid whitesmoke;
 	border-radius: 3px;
 `;
 
@@ -145,11 +152,11 @@ export const ClassCheckboxesWrap = styled.div`
 
 //ClassManagement
 export const SaveToClass = styled.button`
-	color: palevioletred;
+	color: whitesmoke;
 	font-size: 1em;
 	margin: 1em;
 	padding: 0.25em 1em;
-	border: 2px solid palevioletred;
+	border: 2px solid whitesmoke;
 	border-radius: 3px;
 	background: transparent;
 `;
@@ -157,42 +164,34 @@ export const SaveToClass = styled.button`
 export const ClassList = styled.div`
 	/* width: 75%; */
 	min-height: 250px;
-	background: #fbf3ff;
+	/* background: #fbf3ff; */
+	background: #02040c;
 	display: flex;
 	flex-flow: column;
 	padding: 20px;
-	border: 2px solid palevioletred;
+	border: 2px solid whitesmoke;
 	border-radius: 12px;
 `;
 export const ClassWrap = styled.div`
-	background: ${props =>
-		props.converted && props.selected
-			? '#4fd20c'
-			: props.selected
-			? 'orange'
-			: props.converted
-			? 'green'
-			: !props.checked
-			? 'gray'
-			: 'transparent'};
+	background: ${props => (props.selected ? 'orange' : 'transparent')};
 	cursor: pointer;
 `;
 
 export const AddNewClass = styled.button`
-	color: palevioletred;
+	color: whitesmoke;
 	font-size: 1em;
 	margin: 1em;
 	padding: 0.25em 1em;
-	border: 2px solid palevioletred;
+	border: 2px solid whitesmoke;
 	border-radius: 3px;
 	background: transparent;
 `;
 export const DeleteClass = styled.button`
-	color: palevioletred;
+	color: whitesmoke;
 	font-size: 1em;
 	margin: 1em;
 	padding: 0.25em 1em;
-	border: 2px solid palevioletred;
+	border: 2px solid whitesmoke;
 	border-radius: 3px;
 	background: transparent;
 `;
@@ -232,4 +231,25 @@ export const CheckboxContainer = styled.div`
 export const CheckboxText = styled.span`
 	padding-left: 5px;
 	font-weight: 500;
+	/* colors */
+	color: white;
+`;
+export const PreOutput = styled.pre`
+	padding: 20px;
+	font-weight: 900;
+	background: #0c0c0d;
+	font-size: 0.9em;
+	max-width: 1000px;
+	overflow: scroll;
+	min-width: 900px;
+	color: #f0e7e7;
+	height: 1000px;
+`;
+
+export const CheckboxTextClass = styled.span`
+	padding-left: 5px;
+	font-weight: 500;
+	/* colors */
+	color: ${props =>
+		props.converted ? 'green' : !props.checked ? '#b54848' : 'white'};
 `;

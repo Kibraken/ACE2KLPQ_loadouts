@@ -10,7 +10,7 @@ export class ParseLoadout {
 
 	validate(data) {
 		//[[], [], [], [], [], [], '', '', [], ['', '', '', '', '', '']];
-		console.log(data);
+		//console.log(data);
 		if (data.length !== 10 || data[9].length !== 6) {
 			return console.log('not valid length'), true;
 		}
@@ -48,39 +48,52 @@ export class ParseLoadout {
 	};
 
 	parseUniformFn = exportData => {
+		//TODO, find and check that in some cases empty strings should be left behind
 		let uniform = [];
 		exportData.forEach((i, index) => {
 			switch (index) {
 				case 3:
+					//console.log('3', i);
 					return (
 						i[0].length !== 0 &&
 						typeof i[0] === 'string' &&
 						(uniform = [...uniform, i[0]])
 					);
 				case 4:
+					//	console.log('4', i);
 					return (
 						i[0].length !== 0 &&
 						typeof i[0] === 'string' &&
 						(uniform = [...uniform, i[0]])
 					);
 				case 5:
+					//	console.log('5', i);
+					//backpack
 					return (
 						i[0].length !== 0 &&
 						typeof i[0] === 'string' &&
 						(uniform = [...uniform, i[0]])
 					);
 				case 6:
+					//helmet
+					//	console.log('6', i);
 					return (
 						i.length !== 0 && typeof i === 'string' && (uniform = [...uniform, i])
 					);
 				case 7:
-					return (
-						i.length !== 0 && typeof i === 'string' && (uniform = [...uniform, i])
-					);
+					//face wear
+					// let uniform1 = [...uniform];
+					// console.log('1', uniform1);
+					// console.log('2', uniform1.push('Lene'));
+					uniform = [...uniform, i];
+					//uniform.splice(uniform.length, 0, 'test');
+
+					return i.length !== 0 && typeof i === 'string' && uniform;
 				default:
 					break;
 			}
 		});
+		//console.log('uniform', uniform);
 		return uniform;
 	};
 	convertFn = async () => {

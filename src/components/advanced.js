@@ -25,7 +25,9 @@ import {
 	HiddenCheckbox,
 	StyledCheckbox,
 	CheckboxContainer,
-	CheckboxText
+	CheckboxText,
+	PreOutput,
+	CheckboxTextClass
 } from '../misc/components';
 import { sqfExport } from '../sqfExport';
 
@@ -51,7 +53,8 @@ class Advanced extends React.Component {
 		currentSelection: 'squadLeader',
 		classes: roles,
 		additionaloptions: additionaloptionsTemplate,
-		saveImport: false
+		saveImport: false,
+		testExport: ''
 	};
 
 	handleCheckboxChange = id => {
@@ -184,13 +187,13 @@ class Advanced extends React.Component {
 		console.log('exportObj', exportObj);
 
 		//looking good, Corovan
-		if(exportObj) { 
+		if (exportObj) {
 			let exportFile = sqfExport(exportObj, this.state.additionaloptions);
-			
 			// exportFile {
-			// 	sqf: <sqf data>	
+			// 	sqf: <sqf data>
 			//  filename: <sqf filename>
 			// }
+			this.setState({ testExport: exportFile.sqf });
 		}
 	};
 	componentDidMount() {
@@ -209,7 +212,8 @@ class Advanced extends React.Component {
 			additionaloptions,
 			currentSelection,
 			importArr,
-			saveImport
+			saveImport,
+			testExport
 		} = this.state;
 
 		return (
@@ -223,9 +227,9 @@ class Advanced extends React.Component {
 
 					<label>
 						<Checkbox checked={saveImport} onChange={() => this.saveThisimport()} />
-						<span>{`Save this input after convertion`}</span>
+						<CheckboxText>{`Save this input after convertion`}</CheckboxText>
 					</label>
-					<Console>Loadout tips, warnings</Console>
+					{/* <Console>Loadout tips, warnings</Console> */}
 					<ClassInfoWrap>
 						<ClassInfoHeader>Selected class information</ClassInfoHeader>
 						<TextHeader>Ingame Class Name:</TextHeader>
@@ -306,7 +310,12 @@ class Advanced extends React.Component {
 											id={i}
 										/>
 									</label>
-									<CheckboxText>{classes[i].className}</CheckboxText>
+									<CheckboxTextClass
+										checked={classes[i].classOptions.isChecked}
+										converted={classes[i].classOptions.converted}
+									>
+										{classes[i].className}
+									</CheckboxTextClass>
 								</ClassWrap>
 							);
 						})}
@@ -318,12 +327,15 @@ class Advanced extends React.Component {
 				</ClassManagmentWrap>
 				<AdvOutputWrap>
 					Output
-					<OutputLoadout onClick={() => this.exportToFile()}>
-						export to file
-					</OutputLoadout>
-					<OutputLoadout onClick={() => this.testFill()}>
-						fill all roles
-					</OutputLoadout>
+					<div>
+						<OutputLoadout onClick={() => this.exportToFile()}>
+							export to file
+						</OutputLoadout>
+						<OutputLoadout onClick={() => this.testFill()}>
+							fill all roles
+						</OutputLoadout>
+					</div>
+					<PreOutput>{testExport}</PreOutput>
 				</AdvOutputWrap>
 			</AdvancedMainWrap>
 		);
