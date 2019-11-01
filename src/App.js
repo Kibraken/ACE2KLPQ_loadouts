@@ -12,6 +12,9 @@ import {
 
 class App extends React.Component {
 	state = {
+		Screen: 'basic',
+		BasicConv: {},
+		AdvConv: {},
 		Loadout: {},
 		ExportArr: initData,
 		ammo: { RifleMags: 10, SidearmMags: 4, RLrockets: 2 }
@@ -23,6 +26,9 @@ class App extends React.Component {
   UI
    parser for default BIS export
   */
+
+	screenswitch = state => this.setState({ Screen: state });
+
 	basicConvert = async () => {
 		const convert = await new ParseLoadout(this.state.ExportArr, this.state.ammo);
 		let Loadout = await convert.convertFn();
@@ -40,21 +46,29 @@ class App extends React.Component {
 	};
 
 	render() {
+		const { Screen } = this.state;
 		return (
 			<Wrapper>
 				<TopSwitchWrap>
-					<TopSwitchBtnL>BASIC</TopSwitchBtnL>
-					<TopSwitchBtnR>ADVANCED</TopSwitchBtnR>
+					<TopSwitchBtnL onClick={() => this.screenswitch('basic')}>
+						BASIC
+					</TopSwitchBtnL>
+					<TopSwitchBtnR onClick={() => this.screenswitch('adv')}>
+						ADVANCED
+					</TopSwitchBtnR>
 				</TopSwitchWrap>
-				{/* <Basic
-					Loadout={this.state.Loadout}
-					ExportArr={this.state.ExportArr}
-					ammo={this.state.ammo}
-					handleText={this.handleText}
-					handleNumInput={this.handleNumInput}
-					basicConvert={this.basicConvert}
-				/> */}
-				<Advanced />
+				{Screen === 'basic' ? (
+					<Basic
+						Loadout={this.state.Loadout}
+						ExportArr={this.state.ExportArr}
+						ammo={this.state.ammo}
+						handleText={this.handleText}
+						handleNumInput={this.handleNumInput}
+						basicConvert={this.basicConvert}
+					/>
+				) : (
+					<Advanced />
+				)}
 			</Wrapper>
 		);
 	}

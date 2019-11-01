@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 	padding: 20px;
 `;
 export const BasicWrapper = styled.div`
-	background: tomato;
+	background: #02040c;
 `;
 export const AdvWrapper = styled.div``;
 export const OutputWrap = styled.div`
