@@ -12,13 +12,16 @@ import {
 	Output,
 	OutputHeader
 } from '../misc/StyledComponents';
+import { useOvermind } from '../store';
 
-const Basic = props => {
+const Basic = () => {
+	const { state, actions } = useOvermind();
+
 	return (
 		<BasicWrapper>
-			<DefaultInput onChange={props.handleText}>
+			{/* <DefaultInput onChange={props.handleText}>
 				{JSON.stringify(props.ExportArr)}
-			</DefaultInput>
+			</DefaultInput> */}
 
 			<Mags>
 				<MagsWrap>
@@ -26,13 +29,13 @@ const Basic = props => {
 					<RifleMagsInput
 						type='number'
 						id='RifleMags'
-						value={props.ammo.RifleMags}
+						value={state.Basic.ammo.RifleMags}
 						min='1'
 						max='50'
-						onChange={e => props.handleNumInput(e)}
+						onChange={actions.changeShowCount}
 					></RifleMagsInput>
 				</MagsWrap>
-				<MagsWrap>
+				{/* <MagsWrap>
 					<label htmlFor='SidearmMags'>Sidearm Mags</label>
 					<SidearmMagsInput
 						type='number'
@@ -53,12 +56,12 @@ const Basic = props => {
 						max='15'
 						onChange={e => props.handleNumInput(e)}
 					></RocketsInput>
-				</MagsWrap>
+				</MagsWrap> */}
 			</Mags>
 
-			<br />
+			{/* <br />
 			<button onClick={props.basicConvert}>convert</button>
-			{/* <button onClick={this.exportFn}>Export</button> */}
+
 			<br />
 			<OutputWrap>
 				<Output>
@@ -93,7 +96,7 @@ const Basic = props => {
 							JSON.stringify(props.Loadout.newUniform) + `;`}
 					</DefOutput>
 				</Output>
-			</OutputWrap>
+			</OutputWrap> */}
 		</BasicWrapper>
 	);
 };
