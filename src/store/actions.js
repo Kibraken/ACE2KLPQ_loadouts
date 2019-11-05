@@ -111,6 +111,7 @@ export const advConvert = async ({ state }, Selected) => {
 		currentSelection,
 		saveImport
 	} = state.Advanced;
+	if (Selected && !classes[Selected].classOptions.isChecked) return;
 	if (Selected) currentSelection = Selected;
 	try {
 		importArr = JSON.parse(importArr);

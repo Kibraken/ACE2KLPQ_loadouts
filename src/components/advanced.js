@@ -130,6 +130,7 @@ const Advanced = () => {
 				<SaveToClass onClick={() => actions.advConvert()}>
 					convert ACE export and save to the selected class
 				</SaveToClass>
+
 				<ClassList>
 					{Object.keys(classes).map(i => {
 						return (
@@ -160,12 +161,14 @@ const Advanced = () => {
 						Add New Class
 					</AddNewClass>
 				</ClassList>
+				<SaveToClass onClick={() => actions.fillAllRolesAtOnce()}>
+					fill all selected roles with current preset
+				</SaveToClass>
 			</ClassManagmentWrap>
 			<AdvOutputWrap>
 				Output
 				<div>
 					<Btn onClick={() => actions.exportToFile()}>export to file</Btn>
-					<Btn onClick={() => actions.fillAllRolesAtOnce()}>fill all roles</Btn>
 				</div>
 				<PreOutput>{sqfExport}</PreOutput>
 			</AdvOutputWrap>
