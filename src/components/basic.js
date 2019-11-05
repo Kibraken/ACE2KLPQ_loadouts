@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
 	BasicWrapper,
 	OutputWrap,
@@ -14,14 +14,16 @@ import {
 } from '../misc/StyledComponents';
 import { useOvermind } from '../store';
 
+//todo: refactor mags and output into reusable components
+
 const Basic = () => {
 	const { state, actions } = useOvermind();
 
 	return (
 		<BasicWrapper>
-			{/* <DefaultInput onChange={props.handleText}>
-				{JSON.stringify(props.ExportArr)}
-			</DefaultInput> */}
+			<DefaultInput onChange={actions.textAreaChange}>
+				{JSON.stringify(state.Basic.ExportArr)}
+			</DefaultInput>
 
 			<Mags>
 				<MagsWrap>
@@ -32,18 +34,18 @@ const Basic = () => {
 						value={state.Basic.ammo.RifleMags}
 						min='1'
 						max='50'
-						onChange={actions.changeShowCount}
+						onChange={e => actions.magsChange(e)}
 					></RifleMagsInput>
 				</MagsWrap>
-				{/* <MagsWrap>
+				<MagsWrap>
 					<label htmlFor='SidearmMags'>Sidearm Mags</label>
 					<SidearmMagsInput
 						type='number'
 						id='SidearmMags'
-						value={props.ammo.SidearmMags}
+						value={state.Basic.ammo.SidearmMags}
 						min='1'
 						max='30'
-						onChange={e => props.handleNumInput(e)}
+						onChange={e => actions.magsChange(e)}
 					></SidearmMagsInput>
 				</MagsWrap>
 				<MagsWrap>
@@ -51,52 +53,52 @@ const Basic = () => {
 					<RocketsInput
 						type='number'
 						id='RLrockets'
-						value={props.ammo.RLrockets}
+						value={state.Basic.ammo.RLrockets}
 						min='1'
 						max='15'
-						onChange={e => props.handleNumInput(e)}
+						onChange={e => actions.magsChange(e)}
 					></RocketsInput>
-				</MagsWrap> */}
+				</MagsWrap>
 			</Mags>
 
-			{/* <br />
-			<button onClick={props.basicConvert}>convert</button>
+			<br />
+			<button onClick={actions.basicConvert}>convert</button>
 
 			<br />
 			<OutputWrap>
 				<Output>
 					<OutputHeader>Rifle</OutputHeader>
 					<DefOutput>
-						{props.Loadout.newRifle !== undefined &&
-							props.Loadout.newRifle.length !== 0 &&
-							JSON.stringify(props.Loadout.newRifle) + `;`}
+						{state.Basic.Loadout.newRifle !== undefined &&
+							state.Basic.Loadout.newRifle.length !== 0 &&
+							JSON.stringify(state.Basic.Loadout.newRifle) + `;`}
 					</DefOutput>
 				</Output>
 				<Output>
 					<OutputHeader>Secondary (Launcher)</OutputHeader>
 					<DefOutput>
-						{props.Loadout.newLauncher !== undefined &&
-							props.Loadout.newLauncher.length !== 0 &&
-							JSON.stringify(props.Loadout.newLauncher) + `;`}
+						{state.Basic.Loadout.newLauncher !== undefined &&
+							state.Basic.Loadout.newLauncher.length !== 0 &&
+							JSON.stringify(state.Basic.Loadout.newLauncher) + `;`}
 					</DefOutput>
 				</Output>
 				<Output>
 					<OutputHeader>Handgun</OutputHeader>
 					<DefOutput>
-						{props.Loadout.newHandgun !== undefined &&
-							props.Loadout.newHandgun.length !== 0 &&
-							JSON.stringify(props.Loadout.newHandgun) + `;`}
+						{state.Basic.Loadout.newHandgun !== undefined &&
+							state.Basic.Loadout.newHandgun.length !== 0 &&
+							JSON.stringify(state.Basic.Loadout.newHandgun) + `;`}
 					</DefOutput>
 				</Output>
 				<Output>
 					<OutputHeader>Uniform</OutputHeader>
 					<DefOutput>
-						{props.Loadout.newUniform !== undefined &&
-							props.Loadout.newUniform.length !== 0 &&
-							JSON.stringify(props.Loadout.newUniform) + `;`}
+						{state.Basic.Loadout.newUniform !== undefined &&
+							state.Basic.Loadout.newUniform.length !== 0 &&
+							JSON.stringify(state.Basic.Loadout.newUniform) + `;`}
 					</DefOutput>
 				</Output>
-			</OutputWrap> */}
+			</OutputWrap>
 		</BasicWrapper>
 	);
 };
