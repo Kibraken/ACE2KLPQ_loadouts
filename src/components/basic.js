@@ -10,7 +10,9 @@ import {
 	Mags,
 	DefOutput,
 	Output,
-	OutputHeader
+	OutputHeader,
+	BasicLbl,
+	BasicConvertBtn
 } from '../misc/StyledComponents';
 import { useOvermind } from '../store';
 
@@ -27,7 +29,7 @@ const Basic = () => {
 
 			<Mags>
 				<MagsWrap>
-					<label htmlFor='RifleMags'>Rifle Mags</label>
+					<BasicLbl htmlFor='RifleMags'>Rifle Mags</BasicLbl>
 					<RifleMagsInput
 						type='number'
 						id='RifleMags'
@@ -38,7 +40,7 @@ const Basic = () => {
 					></RifleMagsInput>
 				</MagsWrap>
 				<MagsWrap>
-					<label htmlFor='SidearmMags'>Sidearm Mags</label>
+					<BasicLbl htmlFor='SidearmMags'>Sidearm Mags</BasicLbl>
 					<SidearmMagsInput
 						type='number'
 						id='SidearmMags'
@@ -49,7 +51,7 @@ const Basic = () => {
 					></SidearmMagsInput>
 				</MagsWrap>
 				<MagsWrap>
-					<label htmlFor='RLrockets'>RL rockets</label>
+					<BasicLbl htmlFor='RLrockets'>RL rockets</BasicLbl>
 					<RocketsInput
 						type='number'
 						id='RLrockets'
@@ -62,7 +64,7 @@ const Basic = () => {
 			</Mags>
 
 			<br />
-			<button onClick={actions.basicConvert}>convert</button>
+			<BasicConvertBtn onClick={actions.basicConvert}>convert</BasicConvertBtn>
 
 			<br />
 			<OutputWrap>

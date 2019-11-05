@@ -16,10 +16,16 @@ const App = () => {
 	return (
 		<Wrapper>
 			<TopSwitchWrap>
-				<TopSwitchBtnL onClick={() => actions.switchScreen('basic')}>
+				<TopSwitchBtnL
+					onClick={() => actions.switchScreen('basic')}
+					active={state.Screen}
+				>
 					BASIC
 				</TopSwitchBtnL>
-				<TopSwitchBtnR onClick={() => actions.switchScreen('adv')}>
+				<TopSwitchBtnR
+					onClick={() => actions.switchScreen('adv')}
+					active={state.Screen}
+				>
 					ADVANCED
 				</TopSwitchBtnR>
 			</TopSwitchWrap>

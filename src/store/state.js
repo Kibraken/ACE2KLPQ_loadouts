@@ -1,7 +1,7 @@
 import { roles, additionaloptionsTemplate, initData } from '../misc/data';
 
 export const state = {
-	Screen: 'adv',
+	Screen: 'basic',
 	test: '',
 	Basic: {
 		Loadout: {},

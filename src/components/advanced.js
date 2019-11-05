@@ -26,7 +26,8 @@ import {
 	CheckboxContainer,
 	CheckboxText,
 	PreOutput,
-	CheckboxTextClass
+	CheckboxTextClass,
+	Btn
 } from '../misc/components';
 
 //output shite
@@ -163,12 +164,8 @@ const Advanced = () => {
 			<AdvOutputWrap>
 				Output
 				<div>
-					<OutputLoadout onClick={() => actions.exportToFile()}>
-						export to file
-					</OutputLoadout>
-					<OutputLoadout onClick={() => actions.fillAllRolesAtOnce()}>
-						fill all roles
-					</OutputLoadout>
+					<Btn onClick={() => actions.exportToFile()}>export to file</Btn>
+					<Btn onClick={() => actions.fillAllRolesAtOnce()}>fill all roles</Btn>
 				</div>
 				<PreOutput>{sqfExport}</PreOutput>
 			</AdvOutputWrap>

@@ -66,10 +66,11 @@ export const TopSwitchWrap = styled.div`
 `;
 export const TopSwitchBtnL = styled.div`
 	font-weight: 900;
-	background: tomato;
+	background: white;
 	cursor: pointer;
-	border: 1px solid black;
+	border: 2px solid white;
 	border-bottom: none;
+	/* background: ${props => (props.checked ? 'salmon' : 'papayawhip')}; */
 `;
 export const TopSwitchBtnR = styled.div`
 	font-weight: 900;
@@ -87,6 +88,7 @@ export const AdvancedMainWrap = styled.div`
 	/* colors */
 	/* background: #0b1022; */
 	background: #02040c;
+	border: 1px solid white;
 `;
 export const InputWrap = styled.div`
 	width: 350px;
@@ -97,7 +99,8 @@ export const ClassManagmentWrap = styled.div`
 	padding: 20px;
 `;
 export const AdvOutputWrap = styled.div`
-	width: 350px;
+	max-width: 1018px;
+	min-width: 900px;
 	padding: 20px;
 `;
 export const TextHeader = styled.p`
@@ -239,11 +242,12 @@ export const PreOutput = styled.pre`
 	font-weight: 900;
 	background: #0c0c0d;
 	font-size: 0.9em;
-	max-width: 1000px;
+	/* max-width: 1000px; */
 	overflow: scroll;
-	min-width: 900px;
+	/* min-width: 900px; */
 	color: #f0e7e7;
 	height: 1000px;
+	width: 100%;
 `;
 
 export const CheckboxTextClass = styled.span`
@@ -252,4 +256,14 @@ export const CheckboxTextClass = styled.span`
 	/* colors */
 	color: ${props =>
 		props.converted ? 'green' : !props.checked ? '#b54848' : 'white'};
+`;
+
+export const Btn = styled.button`
+	color: whitesmoke;
+	font-size: 1em;
+	margin: 1px;
+	padding: 0.25em 1em;
+	border: 2px solid whitesmoke;
+	border-radius: 3px;
+	background: transparent;
 `;
