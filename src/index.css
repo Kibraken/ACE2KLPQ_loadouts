@@ -10,6 +10,8 @@ body {
     background-position: center;
 	background-repeat: no-repeat; */
 	background: #0b1022;
+	display: flex;
+	justify-content: center;
 }
 
 code {

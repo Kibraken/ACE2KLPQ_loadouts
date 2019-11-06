@@ -2,8 +2,7 @@ import React from 'react';
 
 import { useOvermind } from '../store';
 import { SCa, SCb } from '../StyledComponents';
-
-//
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Checkbox = ({ className, checked, ...props }) => (
 	<SCa.CheckboxContainer className={className}>
@@ -142,7 +141,7 @@ const Advanced = () => {
 											`;`}
 									</SCb.DefOutput>
 								</SCb.Output>
-								<SCb.Output>
+								<SCb.Output hg={true}>
 									<SCb.OutputHeader>ACE template used</SCb.OutputHeader>
 									<SCb.DefOutput size={11} wrap={true}>
 										{classes[currentSelection].exportUsed}
@@ -193,10 +192,14 @@ const Advanced = () => {
 				</SCa.SaveToClass>
 			</SCa.ClassManagmentWrap>
 			<SCa.AdvOutputWrap>
-				Output
+				<SCb.OutputHeader>Output</SCb.OutputHeader>
 				<div>
 					<SCa.Btn onClick={() => actions.exportToFile()}>export to file</SCa.Btn>
+					<CopyToClipboard text={sqfExport} onCopy={actions.onCopy}>
+						<SCa.Btn>{state.copied ? 'copied' : 'Copy to clipboard'}</SCa.Btn>
+					</CopyToClipboard>
 				</div>
+
 				<SCa.PreOutput>{sqfExport}</SCa.PreOutput>
 			</SCa.AdvOutputWrap>
 		</SCa.AdvancedMainWrap>

@@ -3,14 +3,15 @@ import styled from 'styled-components';
 export const BasicWrapper = styled.div`
 	background: #02040c;
 	border: 1px solid white;
+	width: 1850px;
 `;
 export const OutputWrap = styled.div`
-	height: 180px;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-between;
 	padding-left: 10px;
 	width: fit-content;
+	/* height: 180px; */
 `;
 
 export const DefaultInput = styled.textarea`
@@ -54,8 +55,8 @@ export const DefOutput = styled.pre`
 export const Output = styled.div`
 	display: 'flex';
 	flex-flow: column;
-	height: 42px;
 	width: 100%;
+	height: ${props => (props.hg ? `auto` : '42px')};
 `;
 export const OutputHeader = styled.div`
 	font-weight: 600;

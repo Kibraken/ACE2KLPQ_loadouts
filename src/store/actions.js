@@ -179,3 +179,9 @@ export const fillAllRolesAtOnce = ({ state, actions }) => {
 
 export const showInfo = ({ state }) =>
 	(state.Advanced.showInfo = !state.Advanced.showInfo);
+
+export const onCopy = async ({ state }) => {
+	state.copied = true;
+	await new Promise(resolve => setTimeout(resolve, 3000));
+	state.copied = false;
+};

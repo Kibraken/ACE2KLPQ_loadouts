@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
+	width: 1850px;
 `;
 
 export const TopSwitchWrap = styled.div`

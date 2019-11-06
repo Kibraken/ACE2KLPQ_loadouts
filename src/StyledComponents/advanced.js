@@ -11,9 +11,13 @@ export const AdvancedMainWrap = styled.div`
 	/* background: #0b1022; */
 	background: #02040c;
 	border: 1px solid white;
+	/* width: fit-content; */
+	justify-content: space-between;
+	width: 1850px;
 `;
 export const InputWrap = styled.div`
-	width: 350px;
+	width: 550px;
+	min-width: 550px;
 	padding: 20px;
 `;
 export const ClassManagmentWrap = styled.div`
@@ -22,8 +26,9 @@ export const ClassManagmentWrap = styled.div`
 	height: fit-content;
 `;
 export const AdvOutputWrap = styled.div`
-	max-width: 1018px;
-	min-width: 900px;
+	/* max-width: 1018px;
+	min-width: 900px; */
+	width: 880px;
 	padding: 20px;
 `;
 export const TextHeader = styled.p`
@@ -169,8 +174,9 @@ export const PreOutput = styled.pre`
 	overflow: scroll;
 	/* min-width: 900px; */
 	color: #f0e7e7;
-	height: 1000px;
-	width: 100%;
+	max-height: 1000px;
+	width: 97%;
+	min-height: 550px;
 `;
 
 export const CheckboxTextClass = styled.span`
