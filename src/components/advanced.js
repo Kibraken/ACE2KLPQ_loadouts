@@ -1,48 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+
 import { useOvermind } from '../store';
+import { SCa } from '../StyledComponents';
 
-import {
-	AdvancedMainWrap,
-	InputWrap,
-	ClassManagmentWrap,
-	AdvOutputWrap,
-	TextHeader,
-	LoadInput,
-	Console,
-	ClassInfoWrap,
-	ClassInfoHeader,
-	ClassNameInput,
-	ClassTags,
-	ClassCheckboxesWrap,
-	SaveToClass,
-	ClassList,
-	ClassWrap,
-	AddNewClass,
-	DeleteClass,
-	Icon,
-	HiddenCheckbox,
-	StyledCheckbox,
-	CheckboxContainer,
-	CheckboxText,
-	PreOutput,
-	CheckboxTextClass,
-	Btn
-} from '../misc/components';
-
-//output shite
-
-export const OutputLoadout = styled.button``;
-//custom checkboxes
 const Checkbox = ({ className, checked, ...props }) => (
-	<CheckboxContainer className={className}>
-		<HiddenCheckbox checked={checked} {...props} />
-		<StyledCheckbox checked={checked}>
-			<Icon viewBox='0 0 24 24'>
+	<SCa.CheckboxContainer className={className}>
+		<SCa.HiddenCheckbox checked={checked} {...props} />
+		<SCa.StyledCheckbox checked={checked}>
+			<SCa.Icon viewBox='0 0 24 24'>
 				<polyline points='20 6 9 17 4 12' />
-			</Icon>
-		</StyledCheckbox>
-	</CheckboxContainer>
+			</SCa.Icon>
+		</SCa.StyledCheckbox>
+	</SCa.CheckboxContainer>
 );
 
 const Advanced = () => {
@@ -56,9 +25,9 @@ const Advanced = () => {
 		sqfExport
 	} = state.Advanced;
 	return (
-		<AdvancedMainWrap>
-			<InputWrap>
-				<LoadInput
+		<SCa.AdvancedMainWrap>
+			<SCa.InputWrap>
+				<SCa.LoadInput
 					placeholder={'place ACE export here'}
 					onChange={e => actions.textAreaChangeAdv(e)}
 					value={importArr}
@@ -66,34 +35,36 @@ const Advanced = () => {
 
 				<label>
 					<Checkbox checked={saveImport} onChange={() => actions.saveThisimport()} />
-					<CheckboxText>{`Save this input after convertion`}</CheckboxText>
+					<SCa.CheckboxText>{`Save this input after convertion`}</SCa.CheckboxText>
 				</label>
-				{/* <Console>Loadout tips, warnings</Console> */}
-				<ClassInfoWrap>
-					<ClassInfoHeader>Selected class information</ClassInfoHeader>
-					<TextHeader>Ingame Class Name:</TextHeader>
-					<ClassNameInput
+
+				<SCa.ClassInfoWrap>
+					<SCa.ClassInfoHeader>Selected class information</SCa.ClassInfoHeader>
+					<SCa.TextHeader>Ingame Class Name:</SCa.TextHeader>
+					<SCa.ClassNameInput
 						value={
 							classes[currentSelection].className
 								? classes[currentSelection].className
 								: undefined
 						}
 						onChange={e => actions.handleClassText(e)}
-					></ClassNameInput>
-					<TextHeader>Additional Class Tags:</TextHeader>
-					<ClassTags
+					></SCa.ClassNameInput>
+					<SCa.TextHeader>Additional Class Tags:</SCa.TextHeader>
+					<SCa.ClassTags
 						value={classes[currentSelection].classTags}
 						//onChange={e => this.handleText(e, 'class+')}
-					></ClassTags>
-				</ClassInfoWrap>
-				<ClassCheckboxesWrap>
-					<TextHeader>Additional class options:</TextHeader>
+					></SCa.ClassTags>
+				</SCa.ClassInfoWrap>
+				<SCa.ClassCheckboxesWrap>
+					<SCa.TextHeader>Additional class options:</SCa.TextHeader>
 					{Object.keys(additionaloptions).map((i, index) => {
 						return (
 							<label key={i}>
 								{index < 3 ? (
 									<React.Fragment>
-										<ClassInfoHeader>{additionaloptions[i].fieldName}</ClassInfoHeader>
+										<SCa.ClassInfoHeader>
+											{additionaloptions[i].fieldName}
+										</SCa.ClassInfoHeader>
 										<input
 											type='number'
 											value={additionaloptions[i].amount}
@@ -108,10 +79,10 @@ const Advanced = () => {
 											checked={classes[currentSelection].classOptions[i]}
 											onChange={() => actions.handleCheckboxChange(i)}
 										/>
-										<CheckboxText>
+										<SCa.CheckboxText>
 											{additionaloptions[i].fieldName}
 											{'         '}
-										</CheckboxText>
+										</SCa.CheckboxText>
 									</React.Fragment>
 								)}
 								{additionaloptions[i].type &&
@@ -124,17 +95,18 @@ const Advanced = () => {
 							</label>
 						);
 					})}
-				</ClassCheckboxesWrap>
-			</InputWrap>
-			<ClassManagmentWrap>
-				<SaveToClass onClick={() => actions.advConvert()}>
-					convert ACE export and save to the selected class
-				</SaveToClass>
+				</SCa.ClassCheckboxesWrap>
+			</SCa.InputWrap>
 
-				<ClassList>
+			<SCa.ClassManagmentWrap>
+				<SCa.SaveToClass onClick={() => actions.advConvert()}>
+					convert ACE export and save to the selected class
+				</SCa.SaveToClass>
+
+				<SCa.ClassList>
 					{Object.keys(classes).map(i => {
 						return (
-							<ClassWrap
+							<SCa.ClassWrap
 								key={i}
 								selected={classes[i].classOptions.isSelected}
 								checked={classes[i].classOptions.isChecked}
@@ -148,31 +120,31 @@ const Advanced = () => {
 										id={i}
 									/>
 								</label>
-								<CheckboxTextClass
+								<SCa.CheckboxTextClass
 									checked={classes[i].classOptions.isChecked}
 									converted={classes[i].classOptions.converted}
 								>
 									{classes[i].className}
-								</CheckboxTextClass>
-							</ClassWrap>
+								</SCa.CheckboxTextClass>
+							</SCa.ClassWrap>
 						);
 					})}
-					<AddNewClass onClick={() => actions.addNewRole()}>
+					<SCa.AddNewClass onClick={() => actions.addNewRole()}>
 						Add New Class
-					</AddNewClass>
-				</ClassList>
-				<SaveToClass onClick={() => actions.fillAllRolesAtOnce()}>
-					fill all selected roles with current preset
-				</SaveToClass>
-			</ClassManagmentWrap>
-			<AdvOutputWrap>
+					</SCa.AddNewClass>
+				</SCa.ClassList>
+				<SCa.SaveToClass onClick={() => actions.fillAllRolesAtOnce()}>
+					fill all selected roles with the current preset
+				</SCa.SaveToClass>
+			</SCa.ClassManagmentWrap>
+			<SCa.AdvOutputWrap>
 				Output
 				<div>
-					<Btn onClick={() => actions.exportToFile()}>export to file</Btn>
+					<SCa.Btn onClick={() => actions.exportToFile()}>export to file</SCa.Btn>
 				</div>
-				<PreOutput>{sqfExport}</PreOutput>
-			</AdvOutputWrap>
-		</AdvancedMainWrap>
+				<SCa.PreOutput>{sqfExport}</SCa.PreOutput>
+			</SCa.AdvOutputWrap>
+		</SCa.AdvancedMainWrap>
 	);
 };
 

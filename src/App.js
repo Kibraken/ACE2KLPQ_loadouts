@@ -2,36 +2,31 @@ import React from 'react';
 import Basic from './components/basic';
 import Advanced from './components/advanced';
 
-import {
-	Wrapper,
-	TopSwitchWrap,
-	TopSwitchBtnL,
-	TopSwitchBtnR
-} from './misc/StyledComponents';
+import { SCapp } from './StyledComponents';
 import { useOvermind } from './store';
 
 const App = () => {
 	const { state, actions } = useOvermind();
 
 	return (
-		<Wrapper>
-			<TopSwitchWrap>
-				<TopSwitchBtnL
+		<SCapp.Wrapper>
+			<SCapp.TopSwitchWrap>
+				<SCapp.TopSwitchBtnL
 					onClick={() => actions.switchScreen('basic')}
 					active={state.Screen}
 				>
 					BASIC
-				</TopSwitchBtnL>
-				<TopSwitchBtnR
+				</SCapp.TopSwitchBtnL>
+				<SCapp.TopSwitchBtnR
 					onClick={() => actions.switchScreen('adv')}
 					active={state.Screen}
 				>
 					ADVANCED
-				</TopSwitchBtnR>
-			</TopSwitchWrap>
+				</SCapp.TopSwitchBtnR>
+			</SCapp.TopSwitchWrap>
 
 			{state.Screen === 'basic' ? <Basic /> : <Advanced />}
-		</Wrapper>
+		</SCapp.Wrapper>
 	);
 };
 
