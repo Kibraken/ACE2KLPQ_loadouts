@@ -77,7 +77,8 @@ export const roles = {
 			nvg: true,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	combatLifeSaver: {
 		className: 'combat life saver',
@@ -95,7 +96,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	engineer: {
 		className: 'engineer',
@@ -113,7 +115,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	teamLeader: {
 		className: 'team leader',
@@ -131,7 +134,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	missileSpecialistAT: {
 		className: 'missile specialist (at)',
@@ -149,7 +153,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	missileSpecialistAA: {
 		className: 'missile specialist (aa)',
@@ -167,7 +172,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	autorifleman: {
 		className: 'autorifleman',
@@ -185,7 +191,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	riflemanAT: {
 		className: 'rifleman (at)',
@@ -203,7 +210,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	pilot: {
 		className: 'pilot',
@@ -221,7 +229,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	crewman: {
 		className: 'crewman',
@@ -239,7 +248,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	grenadier: {
 		className: 'grenadier',
@@ -257,7 +267,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	},
 	rifleman: {
 		className: 'rifleman',
@@ -275,7 +286,8 @@ export const roles = {
 			nvg: false,
 			map: true,
 			compass: true
-		}
+		},
+		exportUsed: false
 	}
 };
 

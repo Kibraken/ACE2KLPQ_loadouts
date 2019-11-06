@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { useOvermind } from '../store';
-import { SCa } from '../StyledComponents';
+import { SCa, SCb } from '../StyledComponents';
+
+//
 
 const Checkbox = ({ className, checked, ...props }) => (
 	<SCa.CheckboxContainer className={className}>
@@ -22,7 +24,8 @@ const Advanced = () => {
 		classes,
 		currentSelection,
 		additionaloptions,
-		sqfExport
+		sqfExport,
+		showInfo
 	} = state.Advanced;
 	return (
 		<SCa.AdvancedMainWrap>
@@ -96,6 +99,58 @@ const Advanced = () => {
 						);
 					})}
 				</SCa.ClassCheckboxesWrap>
+				{classes[currentSelection].classOptions.converted &&
+					(showInfo ? (
+						<SCa.Plus
+							size='25'
+							title='Show converted loadout info'
+							onClick={actions.showInfo}
+						/>
+					) : (
+						<React.Fragment>
+							<SCa.Minus
+								size='25'
+								title='Hide converted loadout info'
+								onClick={actions.showInfo}
+							/>
+							<SCb.OutputWrap>
+								<SCb.Output>
+									<SCb.OutputHeader>Rifle</SCb.OutputHeader>
+									<SCb.DefOutput size={11}>
+										{JSON.stringify(classes[currentSelection].classLoadout.newRifle) +
+											`;`}
+									</SCb.DefOutput>
+								</SCb.Output>
+								<SCb.Output>
+									<SCb.OutputHeader>Secondary (Launcher)</SCb.OutputHeader>
+									<SCb.DefOutput size={11}>
+										{JSON.stringify(classes[currentSelection].classLoadout.newLauncher) +
+											`;`}
+									</SCb.DefOutput>
+								</SCb.Output>
+								<SCb.Output>
+									<SCb.OutputHeader>Handgun</SCb.OutputHeader>
+									<SCb.DefOutput size={11}>
+										{JSON.stringify(classes[currentSelection].classLoadout.newHandgun) +
+											`;`}
+									</SCb.DefOutput>
+								</SCb.Output>
+								<SCb.Output>
+									<SCb.OutputHeader>Uniform</SCb.OutputHeader>
+									<SCb.DefOutput size={11}>
+										{JSON.stringify(classes[currentSelection].classLoadout.newUniform) +
+											`;`}
+									</SCb.DefOutput>
+								</SCb.Output>
+								<SCb.Output>
+									<SCb.OutputHeader>ACE template used</SCb.OutputHeader>
+									<SCb.DefOutput size={11} wrap={true}>
+										{classes[currentSelection].exportUsed}
+									</SCb.DefOutput>
+								</SCb.Output>
+							</SCb.OutputWrap>
+						</React.Fragment>
+					))}
 			</SCa.InputWrap>
 
 			<SCa.ClassManagmentWrap>

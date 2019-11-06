@@ -98,7 +98,8 @@ export const addNewRole = ({ state }) => {
 			nvg: false,
 			map: false,
 			compass: false
-		}
+		},
+		exportUsed: false
 	};
 	classes[`CustomRole${num}`].className = `CustomRole${num}`;
 };
@@ -133,7 +134,7 @@ export const advConvert = async ({ state }, Selected) => {
 	if (classes[currentSelection].classOptions.binocular)
 		classes[currentSelection].classOptions.binocular =
 			additionaloptions.binocular.type;
-
+	classes[currentSelection].exportUsed = state.Advanced.importArr;
 	if (saveImport === true) {
 		state.Advanced.classes = classes;
 	} else {
@@ -175,3 +176,6 @@ export const fillAllRolesAtOnce = ({ state, actions }) => {
 		console.log('uh-oh something wrong in fillAllRolesAtOnce', error);
 	}
 };
+
+export const showInfo = ({ state }) =>
+	(state.Advanced.showInfo = !state.Advanced.showInfo);

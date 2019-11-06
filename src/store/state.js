@@ -15,6 +15,7 @@ export const state = {
 		classes: roles,
 		additionaloptions: additionaloptionsTemplate,
 		saveImport: false,
-		sqfExport: ''
+		sqfExport: '',
+		showInfo: false
 	}
 };
