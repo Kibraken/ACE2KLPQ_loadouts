@@ -8,7 +8,7 @@ const Basic = () => {
 	const { state, actions } = useOvermind();
 	return (
 		<SCb.BasicWrapper>
-			<SCb.DefaultInput onChange={actions.textAreaChange}>
+			<SCb.DefaultInput onChange={actions.textAreaChangeBasic}>
 				{JSON.stringify(state.Basic.ExportArr)}
 			</SCb.DefaultInput>
 
@@ -21,7 +21,7 @@ const Basic = () => {
 						value={state.Basic.ammo.RifleMags}
 						min='1'
 						max='50'
-						onChange={e => actions.magSCbhange(e)}
+						onChange={e => actions.magsChange(e)}
 					></SCb.RifleMagsInput>
 				</SCb.MagsWrap>
 				<SCb.MagsWrap>
@@ -32,7 +32,7 @@ const Basic = () => {
 						value={state.Basic.ammo.SidearmMags}
 						min='1'
 						max='30'
-						onChange={e => actions.magSCbhange(e)}
+						onChange={e => actions.magsChange(e)}
 					></SCb.SidearmMagsInput>
 				</SCb.MagsWrap>
 				<SCb.MagsWrap>
@@ -43,7 +43,7 @@ const Basic = () => {
 						value={state.Basic.ammo.RLrockets}
 						min='1'
 						max='15'
-						onChange={e => actions.magSCbhange(e)}
+						onChange={e => actions.magsChange(e)}
 					></SCb.RocketsInput>
 				</SCb.MagsWrap>
 			</SCb.Mags>

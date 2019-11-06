@@ -15,6 +15,7 @@ export const magsChange = ({ state }, event) =>
 		event.target.value !== '' ? parseInt(event.target.value) : 1);
 
 export const basicConvert = async ({ state }) => {
+	console.log('dura', state.Basic.ExportArr);
 	const convert = await new ParseLoadout(
 		state.Basic.ExportArr,
 		state.Basic.ammo
