@@ -19,6 +19,7 @@ export const InputWrap = styled.div`
 export const ClassManagmentWrap = styled.div`
 	width: 350px;
 	padding: 20px;
+	height: fit-content;
 `;
 export const AdvOutputWrap = styled.div`
 	max-width: 1018px;
