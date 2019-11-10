@@ -1,15 +1,17 @@
 {
 	"name": "ace2klpq_loadouts",
 	"homepage": "https://apps.dura.science/arma3loadouts",
-	"version": "0.1.0",
+	"version": "2.0.0",
 	"private": true,
 	"dependencies": {
+		"axios": "^0.19.0",
 		"overmind": "^20.0.0",
 		"overmind-react": "^21.0.0",
 		"react": "^16.9.0",
 		"react-copy-to-clipboard": "^5.0.1",
 		"react-dom": "^16.9.0",
 		"react-scripts": "3.1.1",
+		"rodal": "^1.7.0",
 		"styled-components": "^4.3.2",
 		"styled-icons": "^8.6.0"
 	},

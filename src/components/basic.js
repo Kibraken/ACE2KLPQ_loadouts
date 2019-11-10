@@ -1,17 +1,28 @@
 import React from 'react';
 import { SCb } from '../StyledComponents';
 import { useOvermind } from '../store';
-
-//todo: refactor mags and output into reusable components
+import ModalDb from '../components/modal/modal';
 
 const Basic = () => {
 	const { state, actions } = useOvermind();
 	return (
 		<SCb.BasicWrapper>
-			<SCb.DefaultInput onChange={actions.textAreaChangeBasic}>
+			<SCb.MdBtnWrap>
+				<SCb.BasicConvertBtn onClick={() => actions.modal('save')}>
+					save current loadout
+				</SCb.BasicConvertBtn>
+				<SCb.BasicConvertBtn onClick={() => actions.modal('load')}>
+					load saved loadout
+				</SCb.BasicConvertBtn>
+			</SCb.MdBtnWrap>
+			<SCb.DefaultInput
+				onChange={actions.textAreaChangeBasic}
+				value={JSON.stringify(state.Basic.ExportArr)}
+			>
 				{JSON.stringify(state.Basic.ExportArr)}
 			</SCb.DefaultInput>
 
+			<ModalDb />
 			<SCb.Mags>
 				<SCb.MagsWrap>
 					<SCb.BasicLbl htmlFor='RifleMags'>Rifle Mags</SCb.BasicLbl>
@@ -48,12 +59,10 @@ const Basic = () => {
 				</SCb.MagsWrap>
 			</SCb.Mags>
 
-			<br />
 			<SCb.BasicConvertBtn onClick={actions.basicConvert}>
 				convert
 			</SCb.BasicConvertBtn>
 
-			<br />
 			<SCb.OutputWrap>
 				<SCb.Output>
 					<SCb.OutputHeader>Rifle</SCb.OutputHeader>

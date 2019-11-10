@@ -1,8 +1,16 @@
 import { roles, additionaloptionsTemplate, initData } from '../misc/data';
 
-export const state = {
-	Screen: 'basic',
+const state = {
+	Screen: 'Basic',
 	copied: false,
+	isModalOpen: false,
+	modalType: 'save',
+	user_name: '',
+	loadout_name: '',
+	saved_loadouts: [],
+	dbSelected: false,
+	upd: false,
+	err: {},
 	Basic: {
 		Loadout: {},
 		ExportArr: initData,
@@ -19,3 +27,4 @@ export const state = {
 		showInfo: false
 	}
 };
+export default state;

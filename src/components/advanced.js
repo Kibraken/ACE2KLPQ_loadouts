@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useOvermind } from '../store';
 import { SCa, SCb } from '../StyledComponents';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import ModalDb from '../components/modal/modal';
 
 const Checkbox = ({ className, checked, ...props }) => (
 	<SCa.CheckboxContainer className={className}>
@@ -26,8 +27,21 @@ const Advanced = () => {
 		sqfExport,
 		showInfo
 	} = state.Advanced;
+	// useEffect(() => {
+	// 	console.log('screen upd');
+	// }, [state.upd]);
+	//const forceUpdate = useCallback(() => updateState({}), []);
 	return (
 		<SCa.AdvancedMainWrap>
+			<SCb.MdBtnWrap adv={true}>
+				<SCb.BasicConvertBtn onClick={() => actions.modal('save')}>
+					save current loadout
+				</SCb.BasicConvertBtn>
+				<SCb.BasicConvertBtn onClick={() => actions.modal('load')}>
+					load saved loadout
+				</SCb.BasicConvertBtn>
+			</SCb.MdBtnWrap>
+			<ModalDb />
 			<SCa.InputWrap>
 				<SCa.LoadInput
 					placeholder={'place ACE export here'}
@@ -198,6 +212,7 @@ const Advanced = () => {
 					<CopyToClipboard text={sqfExport} onCopy={actions.onCopy}>
 						<SCa.Btn>{state.copied ? 'copied' : 'Copy to clipboard'}</SCa.Btn>
 					</CopyToClipboard>
+					{/* <SCa.Btn onClick={actions.resetConverter}>reset converter</SCa.Btn> */}
 				</div>
 
 				<SCa.PreOutput>{sqfExport}</SCa.PreOutput>

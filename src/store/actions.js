@@ -1,5 +1,6 @@
 import { ParseLoadout } from '../misc/parsConverter';
 import { sqfExport } from '../sqfExport';
+import { default as initState } from './state';
 
 export const switchScreen = ({ state }, screen) => (state.Screen = screen);
 
@@ -15,7 +16,6 @@ export const magsChange = ({ state }, event) =>
 		event.target.value !== '' ? parseInt(event.target.value) : 1);
 
 export const basicConvert = async ({ state }) => {
-	console.log('dura', state.Basic.ExportArr);
 	const convert = await new ParseLoadout(
 		state.Basic.ExportArr,
 		state.Basic.ammo
@@ -185,4 +185,88 @@ export const onCopy = async ({ state }) => {
 	state.copied = true;
 	await new Promise(resolve => setTimeout(resolve, 3000));
 	state.copied = false;
+};
+
+//gen
+
+export const dbSave = async ({ state, effects }) => {
+	try {
+		const { user_name, loadout_name, Screen } = state;
+
+		if (user_name.length < 1 || !/\S/.test(user_name))
+			throw { custom: { user_name: 'user name is missing' } };
+		if (loadout_name.length < 1 || !/\S/.test(loadout_name))
+			throw { custom: { loadout_name: 'loadout name is missing' } };
+		const data = {
+			user_name,
+			loadout_name,
+			loadout_type: Screen,
+			loadout_state: state[Screen]
+		};
+
+		const tst = await effects.db.saveCurrentLoadout(data);
+		//console.log('tst', tst);
+	} catch (error) {
+		if (error['custom']) {
+			state.err = { ...state.err, ...error['custom'] };
+		}
+		console.log('error in dbSave', error);
+	}
+};
+
+export const handleDbText = ({ state }, event) => {
+	state[event.target.id] = event.target.value;
+	if (state.err[event.target.id]) delete state.err[event.target.id];
+};
+
+export const sortByDate = async ({ state }) => {
+	state.saved_loadouts.sort(
+		await function(a, b) {
+			var dateA = new Date(a.created);
+			var dateB = new Date(b.created);
+			return dateB - dateA;
+		}
+	);
+};
+
+export const dbGet = async ({ state, actions, effects }) => {
+	try {
+		const tst = await effects.db.getLoadouts();
+		state.saved_loadouts = tst.data.data;
+		actions.sortByDate();
+	} catch (error) {
+		console.log('error in dbGet', error);
+	}
+};
+
+export const modal = ({ state, actions }, value) => {
+	state.isModalOpen = !state.isModalOpen;
+	state.modalType = value;
+	if (value === 'load') actions.dbGet();
+};
+
+export const modalClose = ({ state }) => (state.isModalOpen = false); //just to be sure
+
+export const dbSelected = ({ state }, id) => {
+	state.dbSelected = id;
+};
+export const loadSelected = ({ state, actions }) => {
+	let selectedLoad = state.saved_loadouts.find(e => {
+		return e._id === state.dbSelected;
+	});
+	state[selectedLoad.loadout_type] = { ...selectedLoad.loadout_state };
+
+	// state.loaded = true;
+	// actions.textAreaChangeBasic();
+};
+
+export const cancelSelection = async ({ state }) =>
+	(state.dbSelected = await false);
+
+export const resetConverter = async ({ state }) => {
+	console.log('initState', state);
+	state.upd = true;
+	state = await initState;
+	//console.log('initState', initState);
+	console.log('initState', state);
 };

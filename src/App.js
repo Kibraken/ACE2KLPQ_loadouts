@@ -12,20 +12,20 @@ const App = () => {
 		<SCapp.Wrapper>
 			<SCapp.TopSwitchWrap>
 				<SCapp.TopSwitchBtnL
-					onClick={() => actions.switchScreen('basic')}
+					onClick={() => actions.switchScreen('Basic')}
 					active={state.Screen}
 				>
 					BASIC
 				</SCapp.TopSwitchBtnL>
 				<SCapp.TopSwitchBtnR
-					onClick={() => actions.switchScreen('adv')}
+					onClick={() => actions.switchScreen('Advanced')}
 					active={state.Screen}
 				>
 					ADVANCED
 				</SCapp.TopSwitchBtnR>
 			</SCapp.TopSwitchWrap>
 
-			{state.Screen === 'basic' ? <Basic /> : <Advanced />}
+			{state.Screen === 'Basic' ? <Basic /> : <Advanced />}
 		</SCapp.Wrapper>
 	);
 };

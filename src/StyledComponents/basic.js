@@ -3,7 +3,10 @@ import styled from 'styled-components';
 export const BasicWrapper = styled.div`
 	background: #02040c;
 	border: 1px solid white;
-	width: 1850px;
+	max-width: 1850px;
+	padding: 15px;
+	display: flex;
+	flex-direction: column;
 `;
 export const OutputWrap = styled.div`
 	display: flex;
@@ -12,12 +15,13 @@ export const OutputWrap = styled.div`
 	padding-left: 10px;
 	width: fit-content;
 	/* height: 180px; */
+	margin-top: 20px;
 `;
 
 export const DefaultInput = styled.textarea`
 	width: 99.6%;
 	height: 150px;
-	margin-top: 15px;
+	margin-top: 25px;
 `;
 
 export const RifleMagsInput = styled.input`
@@ -36,6 +40,7 @@ export const MagsWrap = styled.div`
 	width: 150px;
 `;
 export const Mags = styled.div`
+	margin: 20px 0;
 	margin-left: 20px;
 `;
 
@@ -69,9 +74,19 @@ export const BasicLbl = styled.label`
 export const BasicConvertBtn = styled.button`
 	color: whitesmoke;
 	font-size: 1em;
-	margin: 1em;
+	/* margin: 1em; */
 	padding: 0.25em 1em;
 	border: 2px solid whitesmoke;
 	border-radius: 3px;
 	background: transparent;
+	width: max-content;
+	margin: 3px;
+`;
+
+export const MdBtnWrap = styled.div`
+	position: absolute;
+	align-self: ${props => (props.adv ? `unset` : 'flex-end')};
+	margin-top: ${props => (props.adv ? `0px` : '-15px')};
+
+	right: ${props => (props.adv ? `40px` : 'unset')};
 `;

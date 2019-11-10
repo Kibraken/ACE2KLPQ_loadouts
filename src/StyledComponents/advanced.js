@@ -13,7 +13,7 @@ export const AdvancedMainWrap = styled.div`
 	border: 1px solid white;
 	/* width: fit-content; */
 	justify-content: space-between;
-	width: 1850px;
+	max-width: 1850px;
 `;
 export const InputWrap = styled.div`
 	width: 550px;
