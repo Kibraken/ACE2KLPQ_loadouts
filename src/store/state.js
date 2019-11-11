@@ -13,7 +13,7 @@ const state = {
 	err: {},
 	Basic: {
 		Loadout: {},
-		ExportArr: initData,
+		ExportArr: JSON.stringify(initData),
 		ammo: { RifleMags: 10, SidearmMags: 4, RLrockets: 2 }
 	},
 	Advanced: {

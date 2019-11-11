@@ -6,9 +6,16 @@ export const switchScreen = ({ state }, screen) => (state.Screen = screen);
 
 /*---------------------------BASIC------------------------------------------*/
 
-export const textAreaChangeBasic = async ({ state }, event) => {
-	let txt = await JSON.parse(event.target.value);
-	state.Basic.ExportArr = txt;
+export const textAreaChangeBasic = ({ state }, event) => {
+	// let txt = await JSON.parse(event.target.value);
+	// state.Basic.ExportArr = txt;
+
+	try {
+		state.Basic.ExportArr = JSON.parse(JSON.stringify(event.target.value));
+	} catch (error) {
+		console.log('error in textAreaChangeBasic', error);
+		state.Basic.ExportArr = event.target.value;
+	}
 };
 
 export const magsChange = ({ state }, event) =>
@@ -16,10 +23,20 @@ export const magsChange = ({ state }, event) =>
 		event.target.value !== '' ? parseInt(event.target.value) : 1);
 
 export const basicConvert = async ({ state }) => {
-	const convert = await new ParseLoadout(
-		state.Basic.ExportArr,
-		state.Basic.ammo
-	);
+	// const convert = await new ParseLoadout(
+	// 	state.Basic.ExportArr,
+	// 	state.Basic.ammo
+	// );
+	// state.Basic.Loadout = await convert.convertFn();
+	let { ExportArr, ammo } = state.Basic;
+	try {
+		ExportArr = JSON.parse(ExportArr);
+		if (typeof ExportArr !== 'object') throw new Error('not an array');
+	} catch (error) {
+		return console.log('something wrong with the import', error);
+	}
+
+	const convert = await new ParseLoadout(ExportArr, ammo);
 	state.Basic.Loadout = await convert.convertFn();
 };
 
