@@ -28,6 +28,7 @@ const App = () => {
       </SCapp.TopSwitchWrap>
 
       {state.Screen === "Basic" ? <Basic /> : <Advanced />}
+      <SCapp.ver>{`v${process.env.REACT_APP_VERSION}`}</SCapp.ver>
     </SCapp.Wrapper>
   );
 };
