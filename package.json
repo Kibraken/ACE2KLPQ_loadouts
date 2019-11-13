@@ -1,7 +1,7 @@
 {
   "name": "ace2klpq_loadouts",
   "homepage": "https://apps.dura.science/arma3loadouts",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
