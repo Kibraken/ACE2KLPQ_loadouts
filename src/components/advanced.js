@@ -314,8 +314,13 @@ const Advanced = () => {
           <SCa.Btn onClick={() => actions.exportToFile()}>
             {"export to file"}
           </SCa.Btn>
-          <CopyToClipboard text={sqfExport} onCopy={actions.onCopy}>
-            <SCa.Btn>{state.copied ? "copied" : "Copy to clipboard"}</SCa.Btn>
+          <CopyToClipboard
+            text={sqfExport}
+            onCopy={() => actions.onCopy("exp")}
+          >
+            <SCa.Btn>
+              {state.copied == "exp" ? "copied" : "Copy to clipboard"}
+            </SCa.Btn>
           </CopyToClipboard>
           {/* <SCa.Btn onClick={actions.resetConverter}>reset converter</SCa.Btn> */}
         </div>
