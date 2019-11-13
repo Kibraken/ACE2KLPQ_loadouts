@@ -280,7 +280,7 @@ export const roles = {
       radioSq: false,
       radioFt: true,
       isSelected: false,
-      isChecked: false,
+      isChecked: true,
       mgMags: true,
       converted: false,
       nvg: false,

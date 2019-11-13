@@ -116,6 +116,9 @@ export function sqfExport(classes, options) {
     if (classVar === "combatLifeSaver" || classVar === "medic") {
       classItems += `${template.medicMedicine}, `;
     }
+    if (classVar !== "combatLifeSaver" || classVar !== "medic") {
+      classItems += `${template.itemsMed}, `;
+    }
     // If you are a rifleman, this won't make life worse, this will just put you in your place
     if (classVar === "rifleman" && mgMags.length > 0) {
       classItems += `["${mgMags}", 2], `;
@@ -124,6 +127,7 @@ export function sqfExport(classes, options) {
     if (classVar === "riflemanAT" && lat.length < 0) {
       lat = classLoadout.newLauncher[0];
     }
+    classItems += `${template.itemsGeneric}, `;
 
     classItems = classItems.trimRight().slice(0, -1);
     classLinkItems = classLinkItems.trimRight().slice(0, -1);
