@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BasicWrapper = styled.div`
-  background: #02040c;
+  background: #222222;
   border: 1px solid white;
   max-width: 1850px;
   padding: 15px;
@@ -84,13 +84,9 @@ export const BasicConvertBtn = styled.button`
 `;
 
 export const MdBtnWrap = styled.div`
-  position: absolute;
-
-  width: 364px;
-  align-self: ${props => (props.adv ? `unset` : "flex-end")};
-  margin-top: ${props => (props.adv ? `0px` : "-15px")};
-
-  right: ${props => (props.adv ? `58px` : "unset")};
+  display: flex;
+  align-items: center;
+  justify-content: end;
 `;
 
 export const BasicCopyBtn = styled.button`

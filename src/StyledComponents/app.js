@@ -11,36 +11,30 @@ export const TopSwitchWrap = styled.div`
   display: flex;
   justify-content: space-between;
   width: 150px;
+  margin-bottom: 1em;
 `;
 export const TopSwitchBtnL = styled.div`
   font-weight: 900;
-  background: #02040c;
+  background: #222222;
   cursor: pointer;
-  border: 1px solid white;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 5px 1em;
   margin-bottom: -1px;
   z-index: 5;
-  color: ${props => (props.active === "Basic" ? "#a4dfaa" : "white")};
-  border-bottom: ${props =>
-    props.active === "Basic" ? "none" : "1px solid white"};
+  margin-right: 1em;
+  color: white;
   background: ${props =>
-    props.active === "Basic" ? "#02040c" : "transparent"};
+    props.active === "Basic" ? "#222222" : "rgba(34,34,34, 0.5)"};
 `;
 export const TopSwitchBtnR = styled.div`
   font-weight: 900;
-  background: #02040c;
+  background: #222222;
   cursor: pointer;
-  border: 1px solid white;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 5px 1em;
   margin-bottom: -1px;
   z-index: 5;
-  color: ${props => (props.active === "Advanced" ? "#a4dfaa" : "white")};
-  border-bottom: ${props =>
-    props.active === "Advanced" ? "none" : "1px solid white"};
+  color: white;
   background: ${props =>
-    props.active === "Advanced" ? "#02040c" : "transparent"};
+    props.active === "Advanced" ? "#222222" : "rgba(34,34,34, 0.5)"};
 `;
 
 export const ver = styled.div`
